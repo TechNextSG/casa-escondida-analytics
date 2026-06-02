@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog — Casa Escondida Anilao</title>
+  <style>
+    :root {
+      --navy:   #0d1e2e;
+      --navy2:  #1a3050;
+      --teal:   #4dc8e8;
+      --teal-d: #2fa8c8;
+      --gold:   #e8c56a;
+      --bg:     #f4f7fa;
+      --card:   #ffffff;
+      --text:   #1a2b3c;
+      --text2:  #4a6070;
+      --border: #dde5ee;
+      --green:  #22c55e;
+      --green-bg: #dcfce7;
+      --green-text: #15803d;
+      --blue-bg:  #dbeafe;
+      --blue-text: #1d4ed8;
+      --purple-bg: #ede9fe;
+      --purple-text: #6d28d9;
+      --orange-bg: #ffedd5;
+      --orange-text: #c2410c;
+      --pink-bg: #fce7f3;
+      --pink-text: #be185d;
+      --gray-bg: #f1f5f9;
+      --gray-text: #475569;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      padding: 2.5rem 3rem; color: white; position: relative; overflow: hidden;
+    }
+    header::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 260px; height: 260px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(77,200,232,.15) 0%, transparent 70%);
+    }
+    .header-eyebrow { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-bottom: .5rem; }
+    .header-title { font-size: 1.8rem; font-weight: 700; margin-bottom: .3rem; }
+    .header-title span { color: var(--teal); }
+    .header-sub { color: rgba(255,255,255,.55); font-size: .85rem; }
+    .header-meta { display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .meta-item { display: flex; flex-direction: column; gap: .1rem; }
+    .meta-label { font-size: .58rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.38); }
+    .meta-value { font-size: .82rem; color: rgba(255,255,255,.85); font-weight: 500; }
+
+    /* LAYOUT */
+    .container { max-width: 1040px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    /* SUMMARY PILLS */
+    .summary { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .s-pill {
+      display: flex; align-items: center; gap: .45rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 40px; padding: .45rem 1rem; font-size: .78rem; font-weight: 600;
+    }
+    .s-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* FILTER BAR */
+    .filter-bar { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .filter-btn {
+      padding: .4rem 1rem; border-radius: 40px; border: 1px solid var(--border);
+      background: var(--card); color: var(--text2); font-size: .75rem; font-weight: 500;
+      cursor: pointer; transition: all .2s; font-family: inherit;
+    }
+    .filter-btn:hover, .filter-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-group { margin-bottom: 2rem; }
+    .tl-date {
+      font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--teal-d); font-weight: 700; margin-bottom: .8rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .tl-date::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .tl-item {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.1rem 1.4rem; margin-bottom: .6rem;
+      display: grid; grid-template-columns: auto 1fr auto; gap: .8rem 1.2rem;
+      align-items: start; transition: box-shadow .2s;
+    }
+    .tl-item:hover { box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .tl-item.tl-left { border-left: 3px solid; }
+
+    .cat-tag {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .2rem .65rem; border-radius: 20px; font-size: .67rem;
+      font-weight: 600; letter-spacing: .04em; white-space: nowrap;
+    }
+    .cat-seo      { background: var(--blue-bg);   color: var(--blue-text);   border-left-color: #3b82f6; }
+    .cat-ux       { background: var(--purple-bg);  color: var(--purple-text); border-left-color: #8b5cf6; }
+    .cat-mobile   { background: var(--orange-bg);  color: var(--orange-text); border-left-color: #f97316; }
+    .cat-perf     { background: var(--green-bg);   color: var(--green-text);  border-left-color: #22c55e; }
+    .cat-content  { background: var(--pink-bg);    color: var(--pink-text);   border-left-color: #ec4899; }
+    .cat-ai       { background: #f0fdf4;            color: #166534;            border-left-color: #16a34a; }
+
+    .tl-body { }
+    .tl-title { font-size: .88rem; font-weight: 700; color: var(--navy); margin-bottom: .25rem; }
+    .tl-desc  { font-size: .78rem; color: var(--text2); line-height: 1.65; }
+    .tl-files { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: .5rem; }
+    .tl-file {
+      font-size: .65rem; background: var(--gray-bg); color: var(--gray-text);
+      border-radius: 4px; padding: .15rem .5rem; font-family: 'Consolas', monospace;
+    }
+
+    .status-done {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: var(--green-bg); color: var(--green-text);
+      font-size: .65rem; font-weight: 700; padding: .2rem .6rem; border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* PRINT */
+    @media print {
+      body { background: white; }
+      header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">TechNext SG · Project Log</div>
+  <div class="header-title">Website <span>Changelog</span></div>
+  <div class="header-sub">casaescondida-anilao.com — All changes tracked from project start</div>
+  <div class="header-meta">
+    <div class="meta-item"><span class="meta-label">Client</span><span class="meta-value">Casa Escondida Anilao</span></div>
+    <div class="meta-item"><span class="meta-label">Repository</span><span class="meta-value">github.com/TechNextSG/casa-escondida-anilao</span></div>
+    <div class="meta-item"><span class="meta-label">Last Updated</span><span class="meta-value">June 2, 2026</span></div>
+    <div class="meta-item"><span class="meta-label">Total Changes</span><span class="meta-value">20 updates across 6 categories</span></div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <div class="s-pill"><div class="s-dot" style="background:#3b82f6"></div>SEO — 3</div>
+    <div class="s-pill"><div class="s-dot" style="background:#8b5cf6"></div>UX / Design — 6</div>
+    <div class="s-pill"><div class="s-dot" style="background:#f97316"></div>Mobile — 5</div>
+    <div class="s-pill"><div class="s-dot" style="background:#22c55e"></div>Performance — 3</div>
+    <div class="s-pill"><div class="s-dot" style="background:#ec4899"></div>Content — 2</div>
+    <div class="s-pill"><div class="s-dot" style="background:#16a34a"></div>AI / Discovery — 1</div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+
+    <!-- ── JUNE 2, 2026 ── -->
+    <div class="tl-group">
+      <div class="tl-date">June 2, 2026</div>
+
+      <div class="tl-item tl-left cat-ai">
+        <span class="cat-tag cat-ai">🤖 AI Discovery</span>
+        <div class="tl-body">
+          <div class="tl-title">Set up llms.txt & llms-full.txt (llmstxt.org standard)</div>
+          <div class="tl-desc">Created structured reference files so AI assistants (ChatGPT, Claude, Perplexity, Gemini) can accurately surface the resort when users ask about Anilao diving, accommodation, and travel. llms.txt links all 20+ pages and blog posts. llms-full.txt contains complete room specs, dive center details, 9 dive sites, policies, reviews, and contact info.</div>
+          <div class="tl-files"><span class="tl-file">llms.txt</span><span class="tl-file">llms-full.txt</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-seo">
+        <span class="cat-tag cat-seo">📈 SEO</span>
+        <div class="tl-body">
+          <div class="tl-title">Fixed dive page title, H1 & meta description</div>
+          <div class="tl-desc">dive.html had 2,300 words of content but ranked at position 24 — the problem was the title tag didn't mention "scuba diving Batangas" or "Anilao dive center." Title changed to target high-value keywords. H1 and eyebrow updated to reinforce "Scuba Diving Anilao Batangas." Meta description rewritten to include: fun dives, PADI courses, night dives, nitrox, equipment rental.</div>
+          <div class="tl-files"><span class="tl-file">dive.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-seo">
+        <span class="cat-tag cat-seo">📈 SEO</span>
+        <div class="tl-body">
+          <div class="tl-title">Fixed gallery page title, meta & added keyword-rich intro text</div>
+          <div class="tl-desc">Gallery was at position 12 with 82 impressions but 0 clicks, and had only ~200 words of indexable text. Title updated to target "Anilao diving photos." Added a descriptive intro paragraph containing: macro diving, nudibranchs, frogfish, sea turtles, Anilao dive sites, Mabini Batangas — giving Google real content to index on the page.</div>
+          <div class="tl-files"><span class="tl-file">gallery.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-seo">
+        <span class="cat-tag cat-seo">📈 SEO</span>
+        <div class="tl-body">
+          <div class="tl-title">Rewrote Manila-to-Anilao blog meta description</div>
+          <div class="tl-desc">The page was at position 8.25 (edge of page 1) with 93 impressions but 0 clicks — the entire issue was one flat meta description: "Getting from Manila to Anilao, Batangas takes 2–3 hours." Replaced with a specific, compelling 155-character description mentioning bus routes, private van fares, travel time, and a CTA.</div>
+          <div class="tl-files"><span class="tl-file">blog/manila-to-anilao-transfer-guide.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+    </div>
+
+    <!-- ── MAY 2026 ── -->
+    <div class="tl-group">
+      <div class="tl-date">May 2026</div>
+
+      <div class="tl-item tl-left cat-content">
+        <span class="cat-tag cat-content">✏️ Content</span>
+        <div class="tl-body">
+          <div class="tl-title">Removed feature tag pills from About section and Dive overview</div>
+          <div class="tl-desc">Removed the pill/badge tags ("PADI Dive Center," "Free Breakfast," etc.) from the homepage About section and the dive center overview section as requested by the client.</div>
+          <div class="tl-files"><span class="tl-file">index.html</span><span class="tl-file">dive.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-mobile">
+        <span class="cat-tag cat-mobile">📱 Mobile</span>
+        <div class="tl-body">
+          <div class="tl-title">Disabled service card tap animation on touch devices</div>
+          <div class="tl-desc">On mobile, tapping a service card (Dive Center, Beach & Pool, Restaurant, etc.) briefly triggered the springy hover transform (scale + lift), creating a visible glitch. Added @media (hover: none) rules to suppress all transitions, transforms, image zoom, and the accent-line animation on tap.</div>
+          <div class="tl-files"><span class="tl-file">index.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-perf">
+        <span class="cat-tag cat-perf">⚡ Performance</span>
+        <div class="tl-body">
+          <div class="tl-title">Fixed hero section expand glitch on mobile scroll (100dvh → 100svh)</div>
+          <div class="tl-desc">When scrolling down on mobile, the browser URL bar hides, causing 100dvh to recalculate and the hero to visibly expand. Replaced all 100dvh instances with 100svh (small viewport height — locked to the height with URL bar visible, never changes on scroll). Also fixed mob-drawer height.</div>
+          <div class="tl-files"><span class="tl-file">index.html</span><span class="tl-file">dive.html</span><span class="tl-file">gallery.html</span><span class="tl-file">style.css</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-ux">
+        <span class="cat-tag cat-ux">🎨 UX</span>
+        <div class="tl-body">
+          <div class="tl-title">Improved gallery hero readability</div>
+          <div class="tl-desc">Background image brightness reduced from 0.55 to 0.32. Overlay gradient strengthened at the top (0.30→0.45) and mid (0.55→0.62). Day mode now uses same dark overlay as night mode. Description text boosted from 78%→92% white opacity with subtle text shadow. Stat labels boosted from 50%→75% opacity.</div>
+          <div class="tl-files"><span class="tl-file">gallery.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-ux">
+        <span class="cat-tag cat-ux">🎨 UX</span>
+        <div class="tl-body">
+          <div class="tl-title">Added shimmer + fill-wipe animations & click ripple to all CTA buttons</div>
+          <div class="tl-desc">Primary buttons across all pages now have a shimmer sweep on hover (matching the homepage hero). Ghost/outline buttons have a fill-wipe on hover. Click ripple (expanding circle) added to all button types via site.js — previously only existed on homepage hero buttons. Buttons also mobile-centered with full-width stacking on small screens.</div>
+          <div class="tl-files"><span class="tl-file">site.js</span><span class="tl-file">style.css</span><span class="tl-file">rooms.html</span><span class="tl-file">dive.html</span><span class="tl-file">location.html</span><span class="tl-file">gallery.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-mobile">
+        <span class="cat-tag cat-mobile">📱 Mobile</span>
+        <div class="tl-body">
+          <div class="tl-title">Hid Google Map iframe on mobile (location.html)</div>
+          <div class="tl-desc">Google Maps iframe was showing in the hero section on mobile, cluttering the layout. Added @media(max-width:768px) { .loc-hero-map { display:none; } } so only the text directions and buttons show on small screens.</div>
+          <div class="tl-files"><span class="tl-file">location.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-mobile">
+        <span class="cat-tag cat-mobile">📱 Mobile</span>
+        <div class="tl-body">
+          <div class="tl-title">Fixed mobile hamburger nav on all pages</div>
+          <div class="tl-desc">Mobile nav dropdown was broken on all pages due to conflicting inline JS blocks (openMobileNav/closeMobileNav using style.display) fighting the visibility/opacity CSS system in site.js. Removed all inline JS from 6 pages. Replaced full-screen overlay and slide-in drawer with a clean card-style dropdown (rounded, themed for day/night). site.js now has sole control.</div>
+          <div class="tl-files"><span class="tl-file">index.html</span><span class="tl-file">rooms.html</span><span class="tl-file">dive.html</span><span class="tl-file">gallery.html</span><span class="tl-file">location.html</span><span class="tl-file">blog.html</span><span class="tl-file">style.css</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-ux">
+        <span class="cat-tag cat-ux">🎨 UX</span>
+        <div class="tl-body">
+          <div class="tl-title">Font color audit — day & night mode readability</div>
+          <div class="tl-desc">Audited all text color tokens in both themes. Day mode text-secondary and text-muted darkened for better contrast on light backgrounds. Night mode text boosted. Service cards, booking form, and section text opacity values updated across the homepage.</div>
+          <div class="tl-files"><span class="tl-file">index.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-ux">
+        <span class="cat-tag cat-ux">🎨 UX</span>
+        <div class="tl-body">
+          <div class="tl-title">Removed bottom glow from hero in day mode</div>
+          <div class="tl-desc">The hero overlay in day mode faded to a light beige (rgba(245,240,234,0.97)) at the bottom, creating an unpleasant glow effect. Changed to a consistent dark overlay (rgba(4,8,15,0.82)) matching night mode so text remains readable in both themes.</div>
+          <div class="tl-files"><span class="tl-file">index.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-perf">
+        <span class="cat-tag cat-perf">⚡ Performance</span>
+        <div class="tl-body">
+          <div class="tl-title">Fixed hero image drift / edge gaps during animation</div>
+          <div class="tl-desc">The hero background image was "drifting" during the floating animation, revealing white gaps at the edges. Fixed by adding inset:-50px to .hero-photo, creating a 50px buffer on all sides clipped by the overflow:hidden on #hero. Prevents any edge from becoming visible during translate animations.</div>
+          <div class="tl-files"><span class="tl-file">index.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-ux">
+        <span class="cat-tag cat-ux">🎨 UX</span>
+        <div class="tl-body">
+          <div class="tl-title">Hero image repositioning & zoom adjustment</div>
+          <div class="tl-desc">Repositioned and rescaled the hero background image to better centre on the diver subject. Adjusted background-position and background-size for optimal framing on both desktop and mobile viewports.</div>
+          <div class="tl-files"><span class="tl-file">index.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-content">
+        <span class="cat-tag cat-content">✏️ Content</span>
+        <div class="tl-body">
+          <div class="tl-title">May 2026 Analytics Report created</div>
+          <div class="tl-desc">Created a full HTML analytics report covering Google Search Console data for May 2026 — KPI cards, weekly growth charts, top queries, pages, countries, device breakdown, and Facebook Ads recommendation. Saved to the Analytics folder in Google Drive.</div>
+          <div class="tl-files"><span class="tl-file">Analytics/May-2026-Analytics-Report.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-perf">
+        <span class="cat-tag cat-perf">⚡ Performance</span>
+        <div class="tl-body">
+          <div class="tl-title">Mobile nav always-transparent header enforced</div>
+          <div class="tl-desc">Ensured the navigation header remains 100% transparent at all times — no frosted glass or solid background on scroll, as per project requirement. Applied consistently across all pages via style.css and page-specific overrides.</div>
+          <div class="tl-files"><span class="tl-file">style.css</span><span class="tl-file">index.html</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+      <div class="tl-item tl-left cat-mobile">
+        <span class="cat-tag cat-mobile">📱 Mobile</span>
+        <div class="tl-body">
+          <div class="tl-title">Mobile button centering & full-width stacking</div>
+          <div class="tl-desc">Audited all CTA button groups across all pages. Added mobile media queries so button pairs (e.g. Get Directions / Contact Us on location.html, Book / Inquire on rooms.html) stack vertically and stretch full-width on screens ≤768px instead of being left-aligned or side-by-side on narrow screens.</div>
+          <div class="tl-files"><span class="tl-file">location.html</span><span class="tl-file">rooms.html</span><span class="tl-file">dive.html</span><span class="tl-file">style.css</span></div>
+        </div>
+        <span class="status-done">✓ Done</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,.4);text-align:center;padding:1.2rem;font-size:.72rem;">
+  Maintained by <strong style="color:var(--teal)">TechNext SG</strong> · hello@technext.asia · Last updated June 2, 2026
+</footer>
+
+</body>
+</html>

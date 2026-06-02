@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Checklist — Casa Escondida Anilao</title>
+  <style>
+    :root {
+      --navy:  #0d1e2e;
+      --navy2: #1a3050;
+      --teal:  #4dc8e8;
+      --teal-d:#2fa8c8;
+      --gold:  #e8c56a;
+      --bg:    #f4f7fa;
+      --card:  #ffffff;
+      --text:  #1a2b3c;
+      --text2: #4a6070;
+      --border:#dde5ee;
+      --red:   #ef4444; --red-bg: #fee2e2; --red-text: #b91c1c;
+      --yel:   #f59e0b; --yel-bg: #fef9c3; --yel-text: #854d0e;
+      --grn:   #22c55e; --grn-bg: #dcfce7; --grn-text: #15803d;
+      --blu:   #3b82f6; --blu-bg: #dbeafe; --blu-text: #1d4ed8;
+      --gray-bg: #f1f5f9; --gray-text: #475569;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, var(--navy) 0%, #0e2840 100%);
+      padding: 2.5rem 3rem; color: white; position: relative; overflow: hidden;
+    }
+    header::before {
+      content: ''; position: absolute; top: -60px; right: -60px; width: 260px; height: 260px;
+      border-radius: 50%; background: radial-gradient(circle, rgba(232,197,106,.14) 0%, transparent 70%);
+    }
+    .h-eyebrow { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: .5rem; }
+    .h-title { font-size: 1.8rem; font-weight: 700; margin-bottom: .3rem; }
+    .h-title span { color: var(--teal); }
+    .h-sub { color: rgba(255,255,255,.55); font-size: .85rem; max-width: 560px; line-height: 1.65; }
+    .h-meta { display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .hm-item { display: flex; flex-direction: column; gap: .1rem; }
+    .hm-label { font-size: .58rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+    .hm-value { font-size: .82rem; color: rgba(255,255,255,.85); font-weight: 500; }
+
+    /* NOTICE BANNER */
+    .notice {
+      background: rgba(77,200,232,.08); border: 1px solid rgba(77,200,232,.22);
+      border-radius: 10px; padding: 1rem 1.4rem; margin-bottom: 2rem;
+      display: flex; gap: .8rem; align-items: flex-start;
+    }
+    .notice-icon { font-size: 1.1rem; margin-top: .1rem; flex-shrink: 0; }
+    .notice-text { font-size: .82rem; color: var(--text2); line-height: 1.7; }
+    .notice-text strong { color: var(--navy); }
+
+    /* LAYOUT */
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    /* PROGRESS */
+    .progress-bar-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.6rem; margin-bottom: 2rem; }
+    .prog-label { display: flex; justify-content: space-between; font-size: .78rem; font-weight: 600; color: var(--navy); margin-bottom: .6rem; }
+    .prog-bg { height: 10px; background: var(--bg); border-radius: 5px; overflow: hidden; }
+    .prog-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--teal), var(--grn)); width: 10%; transition: width .5s; }
+    .prog-stats { display: flex; gap: 1.5rem; margin-top: .8rem; }
+    .prog-stat { font-size: .75rem; color: var(--text2); display: flex; align-items: center; gap: .4rem; }
+    .prog-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--teal-d); font-weight: 700; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section { margin-bottom: 2.5rem; }
+
+    /* CHECKLIST ITEM */
+    .cl-item {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.2rem 1.4rem; margin-bottom: .7rem;
+      display: grid; grid-template-columns: 28px 1fr auto; gap: .8rem 1rem;
+      align-items: start; transition: box-shadow .2s, border-color .2s;
+    }
+    .cl-item:hover { box-shadow: 0 2px 14px rgba(0,0,0,.06); }
+    .cl-item.done { opacity: .65; }
+    .cl-item.done .cl-title { text-decoration: line-through; color: var(--text2); }
+
+    /* Checkbox */
+    .cl-check {
+      width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0; margin-top: .1rem; transition: all .2s;
+      font-size: .8rem; background: white;
+    }
+    .cl-item.done .cl-check { background: var(--grn); border-color: var(--grn); color: white; }
+
+    .cl-body { }
+    .cl-header { display: flex; align-items: flex-start; gap: .6rem; flex-wrap: wrap; margin-bottom: .35rem; }
+    .cl-title { font-size: .88rem; font-weight: 700; color: var(--navy); }
+    .pri-badge { display: inline-flex; align-items: center; gap: .25rem; padding: .15rem .55rem; border-radius: 20px; font-size: .65rem; font-weight: 700; }
+    .pri-high   { background: var(--red-bg);  color: var(--red-text);  }
+    .pri-med    { background: var(--yel-bg);  color: var(--yel-text);  }
+    .pri-low    { background: var(--grn-bg);  color: var(--grn-text);  }
+    .pri-info   { background: var(--blu-bg);  color: var(--blu-text);  }
+
+    .cl-why { font-size: .78rem; color: var(--text2); line-height: 1.65; margin-bottom: .5rem; }
+    .cl-provide {
+      background: var(--gray-bg); border-radius: 6px; padding: .6rem .9rem;
+      font-size: .76rem; color: var(--text); line-height: 1.65;
+    }
+    .cl-provide strong { color: var(--navy); }
+
+    .cl-impact {
+      background: rgba(77,200,232,.07); border: 1px solid rgba(77,200,232,.15);
+      border-radius: 6px; padding: .45rem .8rem; font-size: .72rem;
+      color: var(--teal-d); font-weight: 600; white-space: nowrap; align-self: start;
+    }
+
+    /* STATUS BADGE */
+    .status-wrap { display: flex; flex-direction: column; gap: .4rem; align-items: flex-end; }
+    .s-pending  { background: var(--red-bg);  color: var(--red-text);  font-size: .65rem; font-weight: 700; padding: .2rem .6rem; border-radius: 20px; white-space: nowrap; }
+    .s-done     { background: var(--grn-bg);  color: var(--grn-text);  font-size: .65rem; font-weight: 700; padding: .2rem .6rem; border-radius: 20px; white-space: nowrap; }
+    .s-inprog   { background: var(--blu-bg);  color: var(--blu-text);  font-size: .65rem; font-weight: 700; padding: .2rem .6rem; border-radius: 20px; white-space: nowrap; }
+
+    /* PRINT */
+    @media print {
+      header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="h-eyebrow">TechNext SG · Client Action Items</div>
+  <div class="h-title">Client <span>Checklist</span></div>
+  <div class="h-sub">Everything we need from Casa Escondida to keep improving the website, SEO rankings, and online bookings. Each item below is a direct investment in more guests finding and booking the resort.</div>
+  <div class="h-meta">
+    <div class="hm-item"><span class="hm-label">Client</span><span class="hm-value">Casa Escondida Anilao</span></div>
+    <div class="hm-item"><span class="hm-label">Date</span><span class="hm-value">June 2, 2026</span></div>
+    <div class="hm-item"><span class="hm-label">Prepared by</span><span class="hm-value">TechNext SG</span></div>
+    <div class="hm-item"><span class="hm-label">Items</span><span class="hm-value">10 action items</span></div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="notice">
+    <div class="notice-icon">💡</div>
+    <div class="notice-text">
+      <strong>How this works:</strong> TechNext SG handles all the technical and creative work. Your role is to supply the real, insider content that only you can provide — your knowledge, photos, and stories.
+      The more you share with us, the higher your site ranks and the more bookings come in automatically, for free, every month.
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-bar-wrap">
+    <div class="prog-label"><span>Overall Progress</span><span>1 of 10 completed (10%)</span></div>
+    <div class="prog-bg"><div class="prog-fill"></div></div>
+    <div class="prog-stats">
+      <div class="prog-stat"><div class="prog-dot" style="background:var(--grn)"></div>1 Completed</div>
+      <div class="prog-stat"><div class="prog-dot" style="background:var(--red)"></div>5 High Priority</div>
+      <div class="prog-stat"><div class="prog-dot" style="background:var(--yel)"></div>3 Medium Priority</div>
+      <div class="prog-stat"><div class="prog-dot" style="background:var(--grn)"></div>2 Low Priority</div>
+    </div>
+  </div>
+
+  <!-- HIGH PRIORITY -->
+  <div class="section">
+    <div class="section-title">🔴 High Priority — Do These First</div>
+
+    <div class="cl-item">
+      <div class="cl-check">☐</div>
+      <div class="cl-body">
+        <div class="cl-header">
+          <span class="cl-title">Send dive center content — sites, equipment & instructor info</span>
+          <span class="pri-badge pri-high">🔴 High</span>
+        </div>
+        <div class="cl-why">Your dive page has 93 impressions but 0 clicks because it ranks at position 24 on Google. The page already has 2,300 words — it just needs your real, specific content to outrank competitors targeting "anilao dive center" and "scuba diving Batangas."</div>
+        <div class="cl-provide"><strong>Please provide:</strong> List of dive sites you regularly visit (with brief descriptions) · Full equipment available for rent · PADI instructor names, certifications, and a short bio · Any unique experiences (specific critters, seasonal highlights, signature dives)</div>
+      </div>
+      <div class="status-wrap">
+        <span class="s-pending">⏳ Pending</span>
+        <div class="cl-impact">→ Position 24 to top 10</div>
+      </div>
+    </div>
+
+    <div class="cl-item">
+      <div class="cl-check">☐</div>
+      <div class="cl-body">
+        <div class="cl-header">
+          <span class="cl-title">Share insider transport tips for Manila-to-Anilao guide</span>
+          <span class="pri-badge pri-high">🔴 High</span>
+        </div>
+        <div class="cl-why">This blog post is at position 8.25 — literally one step away from page 1 on Google. It gets 93 impressions but 0 clicks. The fix is adding the real, specific info that you give guests verbally. Public sources don't have this — only you do.</div>
+        <div class="cl-provide"><strong>Please provide:</strong> Van/shuttle services you recommend (names + contact numbers) · Exact tricycle fare from the highway to the resort · Bus departure points and approximate fares · Any landmarks or turns guests miss · Any tips for airport or BGC pickups</div>
+      </div>
+      <div class="status-wrap">
+        <span class="s-pending">⏳ Pending</span>
+        <div class="cl-impact">→ Could hit page 1 in weeks</div>
+      </div>
+    </div>
+
+    <div class="cl-item">
+      <div class="cl-check">☐</div>
+      <div class="cl-body">
+        <div class="cl-header">
+          <span class="cl-title">Approve Facebook Ads test campaign budget</span>
+          <span class="pri-badge pri-high">🔴 High</span>
+        </div>
+        <div class="cl-why">Organic SEO is growing well (impressions nearly doubled in May) but gets ~85 clicks/month. Facebook Ads can deliver 20,000–50,000 targeted impressions per month immediately — reaching Filipino divers, Singaporean travelers, and HK/TW markets that already show 20–25% interest rates.</div>
+        <div class="cl-provide"><strong>Decision needed:</strong> Approve a ₱15,000–₱30,000/month test campaign for 4 weeks · TechNext SG will handle all setup, creative, targeting, and reporting · We need 3–5 resort photos or short videos for ad creatives · Confirm the booking page or WhatsApp number to direct leads to</div>
+      </div>
+      <div class="status-wrap">
+        <span class="s-pending">⏳ Pending</span>
+        <div class="cl-impact">→ 15–40 leads/month</div>
+      </div>
+    </div>
+
+    <div class="cl-item">
+      <div class="cl-check">☐</div>
+      <div class="cl-body">
+        <div class="cl-header">
+          <span class="cl-title">Send 20–30 high-quality resort photos</span>
+          <span class="pri-badge pri-high">🔴 High</span>
+        </div>
+        <div class="cl-why">The gallery page has 82 impressions but 0 clicks at position 12. People actively search for resort photos before booking — if they can't see the property, they book somewhere else. We've added keyword text to help Google index the page, but real photos are what converts visitors into guests.</div>
+        <div class="cl-provide"><strong>Please send (high-res JPG/PNG preferred):</strong> Resort exterior, beachfront and pool area · Rooms interior (all room types) · Restaurant and bar · Underwater shots (diving, marine life, coral) · Island BBQ experience · Group/social shots of guests (with permission)</div>
+      </div>
+      <div class="status-wrap">
+        <span class="s-pending">⏳ Pending</span>
+        <div class="cl-impact">→ Gallery CTR from 0% to 5%+</div>
+      </div>
+    </div>
+
+    <div class="cl-item">
+      <div class="cl-check">☐</div>
+      <div class="cl-body">
+        <div class="cl-header">
+          <span class="cl-title">Submit llms.txt to llmstxt.site directory</span>
+          <span class="pri-badge pri-high">🔴 High</span>
+        </div>
+        <div class="cl-why">We've set up llms.txt and llms-full.txt on the website so AI assistants (ChatGPT, Claude, Perplexity) can surface the resort accurately. Submitting to the directory gets the files indexed by tools that use this standard — making Casa Escondida appear in AI-generated travel recommendations.</div>
+        <div class="cl-provide">
+          <strong>Go to:</strong> https://llmstxt.site/submit<br>
+          <strong>Product Name:</strong> Casa Escondida Anilao<br>
+          <strong>Website URL:</strong> https://www.casaescondida-anilao.com<br>
+          <strong>Your Name:</strong> Rico TechNext<br>
+          <strong>Email:</strong> hello@technext.asia<br>
+          <strong>llms.txt URL:</strong> https://www.casaescondida-anilao.com/llms.txt<br>
+          <strong>llms-full.txt URL:</strong> https://www.casaescondida-anilao.com/llms-full.txt<br>
+          <strong>Notes:</strong> Boutique PADI 5-Star dive resort in Anilao, Mabini, Batangas, Philippines. Scuba diving packages, PADI courses, 31 ocean-side rooms, restaurant, pool and private beach on Batangas Bay.
+        </div>
+      </div>
+      <div class="status-wrap">
+        <span class="s-pending">⏳ Pending</span>
+        <div class="cl-impact">→ AI discovery</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MEDIUM PRIORITY -->
+  <div class="section">
+    <div class="section-title">🟡 Medium Priority — Do These This Month</div>
+
+    <div class="cl-item">
+      <div class="cl-check">☐</div>
+      <div class="cl-body">
+        <div class="cl-header">
+          <span class="cl-title">Share 2–3 guest testimonials (especially Singapore & international)</span>
+          <span class="pri-badge pri-med">🟡 Medium</span>
+        </div>
+        <div class="cl-why">Singapore visitors click your site at a 25% rate — 4× the average. A real testimonial from a Singaporean guest ("I flew from Singapore specifically to dive here...") builds enormous trust with that audience and helps Google understand who your guests are.</div>
+        <div class="cl-provide"><strong>Please provide:</strong> 2–3 short quotes from real guests (first name + country is enough) · Can be from Facebook, TripAdvisor, WhatsApp messages, or verbal feedback you remember · Especially valuable: Singapore, Hong Kong, Taiwan, Australia guests</div>
+      </div>
+      <div class="status-wrap">
+        <span class="s-pending">⏳ Pending</span>
+        <div class="cl-impact">→ Boosts trust & CTR</div>
+      </div>
+    </div>
+
+    <div class="cl-item">
+      <div class="cl-check">☐</div>
+      <div class="cl-body">
+        <div class="cl-header">
+          <span class="cl-title">Share diving stories, rare sightings & seasonal highlights</span>
+          <span class="pri-badge pri-med">🟡 Medium</span>
+        </div>
+        <div class="cl-why">We need to write blog posts targeting "scuba diving Batangas," "Anilao diving season," and "best macro diving Philippines" — keywords where you currently rank on pages 4–6. Your real, first-hand knowledge is what separates your blog from generic travel sites. These posts compound into free traffic over 6–12 months.</div>
+        <div class="cl-provide"><strong>Please share (voice notes, WhatsApp, or bullet points are fine):</strong> Most memorable or unusual dive sightings · Best months for specific marine life · Any rare critters spotted recently · Guest stories worth sharing · Favourite dive sites and why</div>
+      </div>
+      <div class="status-wrap">
+        <span class="s-pending">⏳ Pending</span>
+        <div class="cl-impact">→ Unlocks new keyword traffic</div>
+      </div>
+    </div>
+
+    <div class="cl-item">
+      <div class="cl-check">☐</div>
+      <div class="cl-body">
+        <div class="cl-header">
+          <span class="cl-title">Reply to recent TripAdvisor & Google reviews</span>
+          <span class="pri-badge pri-med">🟡 Medium</span>
+        </div>
+        <div class="cl-why">Review responses directly improve your Google Business profile ranking and show potential guests you're attentive. You have 81 TripAdvisor reviews and 4.5 stars — a simple thank-you reply to each recent review makes a measurable difference to new visitors deciding where to book.</div>
+        <div class="cl-provide"><strong>Action needed:</strong> Log in to TripAdvisor and Google Business · Reply to any reviews from the last 3 months that haven't been responded to · TechNext SG can draft reply templates for you — just ask and we'll prepare 5–10 ready-to-use responses you can customise</div>
+      </div>
+      <div class="status-wrap">
+        <span class="s-pending">⏳ Pending</span>
+        <div class="cl-impact">→ Improves Google Maps rank</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LOW PRIORITY -->
+  <div class="section">
+    <div class="section-title">🟢 Low Priority — Ongoing / Long-Term</div>
+
+    <div class="cl-item">
+      <div class="cl-check">☐</div>
+      <div class="cl-body">
+        <div class="cl-header">
+          <span class="cl-title">Post on Facebook & Instagram 2–3× per week</span>
+          <span class="pri-badge pri-low">🟢 Low</span>
+        </div>
+        <div class="cl-why">Social media signals indirectly help Google rankings over time. Each post linking back to the website builds authority. You already have 802 Instagram posts — keeping this active (even simple shots from the resort or dives) maintains momentum and keeps the audience engaged.</div>
+        <div class="cl-provide"><strong>Suggestions for easy content:</strong> Dive conditions update ("Visibility 20m today at Sombrero!") · Morning shots of the pool, sea, or breakfast · Underwater photos from recent dives · Guest moments (with permission) · Quick reef health updates</div>
+      </div>
+      <div class="status-wrap">
+        <span class="s-pending">⏳ Ongoing</span>
+      </div>
+    </div>
+
+    <div class="cl-item done">
+      <div class="cl-check">✓</div>
+      <div class="cl-body">
+        <div class="cl-header">
+          <span class="cl-title">llms.txt & llms-full.txt files set up on website</span>
+          <span class="pri-badge pri-info">ℹ️ Done by TechNext</span>
+        </div>
+        <div class="cl-why">AI assistants can now accurately surface Casa Escondida when users ask about Anilao diving, Batangas resorts, or PADI courses in the Philippines.</div>
+        <div class="cl-provide"><strong>Completed June 2, 2026</strong> — Files live at casaescondida-anilao.com/llms.txt and casaescondida-anilao.com/llms-full.txt. Next step: submit to llmstxt.site (see High Priority item above).</div>
+      </div>
+      <div class="status-wrap">
+        <span class="s-done">✓ Done</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,.4);text-align:center;padding:1.2rem;font-size:.72rem;">
+  Prepared by <strong style="color:var(--teal)">TechNext SG</strong> · hello@technext.asia · June 2, 2026 &nbsp;|&nbsp; For Casa Escondida Anilao use only
+</footer>
+
+</body>
+</html>

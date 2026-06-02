@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casa Escondida Anilao — Analytics Hub</title>
+  <style>
+    :root {
+      --navy:#0d1e2e; --navy2:#1a3050; --teal:#4dc8e8;
+      --gold:#e8c56a; --bg:#f4f7fa; --card:#fff;
+      --text:#1a2b3c; --text2:#4a6070; --border:#dde5ee;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+
+    header {
+      background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+      padding:3rem 2rem 2.5rem; text-align:center; color:white; position:relative; overflow:hidden;
+    }
+    header::before {
+      content:''; position:absolute; top:-80px; left:50%; transform:translateX(-50%);
+      width:400px; height:400px; border-radius:50%;
+      background:radial-gradient(circle,rgba(77,200,232,.12) 0%,transparent 70%);
+    }
+    .logo { font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:var(--teal); margin-bottom:.6rem; }
+    h1 { font-size:2rem; font-weight:700; margin-bottom:.4rem; }
+    h1 span { color:var(--teal); }
+    .subtitle { color:rgba(255,255,255,.55); font-size:.9rem; }
+
+    main { max-width:860px; margin:0 auto; padding:3rem 1.5rem 5rem; flex:1; width:100%; }
+
+    .section-label {
+      font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+      color:var(--teal); font-weight:700; margin-bottom:1.2rem;
+      display:flex; align-items:center; gap:.6rem;
+    }
+    .section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+    .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1.2rem; margin-bottom:2.5rem; }
+
+    .card {
+      background:var(--card); border:1px solid var(--border); border-radius:12px;
+      padding:1.8rem; text-decoration:none; color:var(--text);
+      display:flex; flex-direction:column; gap:.6rem;
+      transition:transform .22s,box-shadow .22s,border-color .22s;
+      position:relative; overflow:hidden;
+    }
+    .card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+    .card-blue::before   { background:var(--teal); }
+    .card-gold::before   { background:var(--gold); }
+    .card-purple::before { background:#8b5cf6; }
+    .card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,.1); border-color:rgba(77,200,232,.3); }
+
+    .card-icon { font-size:1.6rem; margin-bottom:.2rem; }
+    .card-title { font-size:1rem; font-weight:700; color:var(--navy); }
+    .card-desc  { font-size:.78rem; color:var(--text2); line-height:1.65; flex:1; }
+    .card-meta  { font-size:.68rem; color:var(--text2); padding-top:.6rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; }
+    .card-arrow { font-size:.8rem; color:var(--teal); font-weight:700; }
+
+    .badge {
+      display:inline-flex; align-items:center; gap:.3rem;
+      font-size:.65rem; font-weight:700; padding:.18rem .55rem; border-radius:20px;
+    }
+    .b-new { background:#dcfce7; color:#15803d; }
+    .b-live { background:#dbeafe; color:#1d4ed8; }
+
+    footer {
+      background:var(--navy); color:rgba(255,255,255,.4);
+      text-align:center; padding:1.2rem; font-size:.72rem;
+    }
+    footer strong { color:var(--teal); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">TechNext SG · Analytics Hub</div>
+  <h1>Casa Escondida <span>Anilao</span></h1>
+  <p class="subtitle">Internal reports, changelogs, and client resources — June 2026</p>
+</header>
+
+<main>
+
+  <div class="section-label">Reports & Documents</div>
+  <div class="cards">
+
+    <a href="may-2026-analytics-report.html" class="card card-blue">
+      <div class="card-icon">📊</div>
+      <div class="card-title">May 2026 Analytics Report</div>
+      <div class="card-desc">Google Search Console performance — clicks, impressions, CTR, top queries, countries, devices, and Facebook Ads recommendation.</div>
+      <div class="card-meta">
+        <span>June 1, 2026 · Google Search Console</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="changelog.html" class="card card-gold">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">Website Changelog</div>
+      <div class="card-desc">Complete log of all 20 changes made to casaescondida-anilao.com — SEO fixes, mobile improvements, UX updates, and AI discovery setup.</div>
+      <div class="card-meta">
+        <span>Updated June 2, 2026 · 20 changes</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="client-checklist.html" class="card card-purple">
+      <div class="card-icon">✅</div>
+      <div class="card-title">Client Checklist</div>
+      <div class="card-desc">10 action items for Casa Escondida — what the client needs to provide to keep improving SEO rankings and online bookings.</div>
+      <div class="card-meta">
+        <span>June 2, 2026 · 1 of 10 done</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-label">Quick Links</div>
+  <div class="cards">
+    <a href="https://www.casaescondida-anilao.com" target="_blank" class="card card-blue">
+      <div class="card-icon">🌊</div>
+      <div class="card-title">Live Website</div>
+      <div class="card-desc">casaescondida-anilao.com — the live production site on GitHub Pages.</div>
+      <div class="card-meta"><span>casaescondida-anilao.com</span><span class="card-arrow">↗</span></div>
+    </a>
+    <a href="https://github.com/TechNextSG/casa-escondida-anilao" target="_blank" class="card card-blue">
+      <div class="card-icon">💻</div>
+      <div class="card-title">Website Repository</div>
+      <div class="card-desc">GitHub source code — TechNextSG/casa-escondida-anilao.</div>
+      <div class="card-meta"><span>github.com/TechNextSG</span><span class="card-arrow">↗</span></div>
+    </a>
+    <a href="https://search.google.com/search-console" target="_blank" class="card card-gold">
+      <div class="card-icon">📈</div>
+      <div class="card-title">Google Search Console</div>
+      <div class="card-desc">Live SEO data — clicks, impressions, and ranking positions.</div>
+      <div class="card-meta"><span>search.google.com</span><span class="card-arrow">↗</span></div>
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  Maintained by <strong>TechNext SG</strong> · hello@technext.asia · June 2026
+</footer>
+
+</body>
+</html>
