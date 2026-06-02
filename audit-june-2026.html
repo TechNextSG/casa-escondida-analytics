@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Full Website Audit — Casa Escondida Anilao · June 2026</title>
+  <style>
+    :root{
+      --navy:#0d1e2e;--navy2:#1a3050;--teal:#4dc8e8;--teal-d:#2fa8c8;
+      --gold:#e8c56a;--bg:#f4f7fa;--card:#fff;--text:#1a2b3c;--text2:#4a6070;
+      --border:#dde5ee;
+      --red:#ef4444;--red-bg:#fee2e2;--red-text:#b91c1c;
+      --yel:#f59e0b;--yel-bg:#fef9c3;--yel-text:#854d0e;
+      --grn:#22c55e;--grn-bg:#dcfce7;--grn-text:#15803d;
+      --blu:#3b82f6;--blu-bg:#dbeafe;--blu-text:#1d4ed8;
+      --gray-bg:#f1f5f9;--gray-text:#475569;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;}
+
+    /* ── HEADER ── */
+    header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);padding:2.8rem 3rem 2.2rem;color:#fff;position:relative;overflow:hidden;}
+    header::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(77,200,232,.15) 0%,transparent 70%);}
+    .h-eye{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem;}
+    .h-title{font-size:1.9rem;font-weight:700;margin-bottom:.3rem;}
+    .h-title span{color:var(--teal);}
+    .h-sub{color:rgba(255,255,255,.55);font-size:.85rem;margin-bottom:1.6rem;}
+    .h-meta{display:flex;gap:2rem;flex-wrap:wrap;}
+    .hm{display:flex;flex-direction:column;gap:.1rem;}
+    .hm-l{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+    .hm-v{font-size:.82rem;color:rgba(255,255,255,.85);font-weight:500;}
+
+    /* ── LAYOUT ── */
+    .wrap{max-width:1080px;margin:0 auto;padding:2.2rem 1.5rem 5rem;}
+    .sec{margin-bottom:3rem;}
+    .sec-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-d);font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;}
+    .sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+    /* ── SCORE HERO ── */
+    .score-hero{background:var(--navy);border-radius:14px;padding:2.2rem 2.5rem;display:flex;align-items:center;gap:2.5rem;margin-bottom:2rem;flex-wrap:wrap;}
+    .score-circle{width:110px;height:110px;border-radius:50%;border:4px solid var(--teal);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;}
+    .score-num{font-size:2.2rem;font-weight:700;color:var(--teal);line-height:1;}
+    .score-denom{font-size:.7rem;color:rgba(255,255,255,.4);margin-top:.15rem;}
+    .score-text h2{font-size:1.1rem;color:#fff;font-weight:700;margin-bottom:.5rem;}
+    .score-text p{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.7;max-width:540px;}
+
+    /* ── SCORECARD ── */
+    .scorecard{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:2rem;}
+    .scorecard table{width:100%;border-collapse:collapse;}
+    .scorecard thead th{background:var(--gray-bg);padding:.7rem 1.2rem;text-align:left;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-weight:600;}
+    .scorecard tbody tr:hover{background:#f8fafc;}
+    .scorecard tbody td{padding:.82rem 1.2rem;border-bottom:1px solid #f0f4f8;font-size:.82rem;}
+    .scorecard tbody tr:last-child td{border-bottom:none;}
+    .score-bar-wrap{display:flex;align-items:center;gap:.6rem;}
+    .score-bar{flex:1;height:7px;background:#e5eaf0;border-radius:4px;overflow:hidden;}
+    .score-fill{height:100%;border-radius:4px;}
+    .s-fail{background:var(--red);}
+    .s-warn{background:var(--yel);}
+    .s-pass{background:var(--grn);}
+    .status-badge{display:inline-flex;align-items:center;gap:.25rem;padding:.2rem .6rem;border-radius:20px;font-size:.65rem;font-weight:700;}
+    .st-fail{background:var(--red-bg);color:var(--red-text);}
+    .st-warn{background:var(--yel-bg);color:var(--yel-text);}
+    .st-pass{background:var(--grn-bg);color:var(--grn-text);}
+    .dim-name{font-weight:700;color:var(--navy);}
+    .score-num-sm{font-weight:700;color:var(--navy);white-space:nowrap;}
+    .dim-finding{font-size:.76rem;color:var(--text2);line-height:1.5;}
+
+    /* ── STRENGTHS ── */
+    .strengths-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+    .strength-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem;border-top:3px solid var(--grn);}
+    .str-num{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grn);font-weight:700;margin-bottom:.4rem;}
+    .str-title{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:.4rem;}
+    .str-desc{font-size:.78rem;color:var(--text2);line-height:1.65;}
+
+    /* ── ISSUE CARDS ── */
+    .issue-card{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:1rem;overflow:hidden;}
+    .issue-head{padding:1rem 1.4rem;display:flex;align-items:flex-start;gap:.8rem;border-bottom:1px solid #f0f4f8;}
+    .issue-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;margin-top:.05rem;}
+    .crit-num{background:var(--red-bg);color:var(--red-text);}
+    .warn-num{background:var(--yel-bg);color:var(--yel-text);}
+    .issue-title{font-size:.9rem;font-weight:700;color:var(--navy);}
+    .issue-body{padding:1rem 1.4rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;}
+    @media(max-width:700px){.issue-body{grid-template-columns:1fr;}}
+    .ib-section{}
+    .ib-label{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);font-weight:600;margin-bottom:.3rem;}
+    .ib-text{font-size:.78rem;color:var(--text);line-height:1.65;}
+    .file-pill{display:inline-block;font-family:'Consolas',monospace;font-size:.68rem;background:var(--gray-bg);color:var(--gray-text);border-radius:4px;padding:.12rem .45rem;margin:.15rem .1rem 0 0;}
+
+    /* ── PRIORITY TABLE ── */
+    .priority-table{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+    .priority-table table{width:100%;border-collapse:collapse;}
+    .priority-table thead th{background:var(--navy);color:rgba(255,255,255,.8);padding:.7rem 1.1rem;text-align:left;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
+    .priority-table tbody tr:hover{background:#f8fafc;}
+    .priority-table tbody td{padding:.82rem 1.1rem;border-bottom:1px solid #f0f4f8;font-size:.8rem;vertical-align:top;}
+    .priority-table tbody tr:last-child td{border-bottom:none;}
+    .rank-badge{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;}
+    .impact-high{color:var(--red-text);font-weight:700;}
+    .impact-med{color:var(--yel-text);font-weight:700;}
+    .impact-low{color:var(--grn-text);font-weight:700;}
+    .effort-pill{display:inline-block;padding:.15rem .5rem;border-radius:20px;font-size:.65rem;font-weight:600;}
+    .ef-vl{background:#dcfce7;color:#15803d;}
+    .ef-l{background:#dbeafe;color:#1d4ed8;}
+    .ef-m{background:#fef9c3;color:#854d0e;}
+    .ef-h{background:#fee2e2;color:#b91c1c;}
+    .cat-pill{display:inline-block;padding:.15rem .5rem;border-radius:20px;font-size:.65rem;font-weight:600;background:var(--gray-bg);color:var(--gray-text);}
+
+    /* ── PASS LIST ── */
+    .pass-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;}
+    .pass-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.7rem 1rem;display:flex;align-items:flex-start;gap:.6rem;font-size:.78rem;color:var(--text2);line-height:1.55;}
+    .pass-icon{width:16px;height:16px;flex-shrink:0;margin-top:.1rem;color:var(--grn);}
+    .pass-icon svg{width:100%;height:100%;}
+
+    /* ── BLOG TABLE ── */
+    .blog-table{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:auto;}
+    .blog-table table{width:100%;border-collapse:collapse;min-width:600px;}
+    .blog-table thead th{background:var(--gray-bg);padding:.65rem 1rem;text-align:left;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-weight:600;}
+    .blog-table tbody td{padding:.65rem 1rem;border-bottom:1px solid #f0f4f8;font-size:.76rem;}
+    .blog-table tbody tr:last-child td{border-bottom:none;}
+    .blog-table tbody tr:hover{background:#f8fafc;}
+
+    footer{background:var(--navy);color:rgba(255,255,255,.4);text-align:center;padding:1.2rem;font-size:.72rem;margin-top:0;}
+    footer strong{color:var(--teal);}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="h-eye">TechNext SG · Quality Assurance</div>
+  <div class="h-title">Full Website <span>Audit</span></div>
+  <div class="h-sub">casaescondida-anilao.com — SEO · Performance · Accessibility · Mobile · Content · Technical</div>
+  <div class="h-meta">
+    <div class="hm"><span class="hm-l">Client</span><span class="hm-v">Casa Escondida Anilao</span></div>
+    <div class="hm"><span class="hm-l">Audit Date</span><span class="hm-v">June 2, 2026</span></div>
+    <div class="hm"><span class="hm-l">Pages Audited</span><span class="hm-v">6 core + 20 blog posts</span></div>
+    <div class="hm"><span class="hm-l">Agents Run</span><span class="hm-v">6 parallel auditors + 1 synthesis</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- SCORE -->
+  <div class="sec">
+    <div class="sec-label">Executive Summary</div>
+    <div class="score-hero">
+      <div class="score-circle">
+        <div class="score-num">68</div>
+        <div class="score-denom">/ 100</div>
+      </div>
+      <div class="score-text">
+        <h2>Overall Site Health: Fair — Solid Foundation, Fixable Gaps</h2>
+        <p>The site has exceptional schema markup, a complete blog system, and a solid performance architecture. The score is pulled down by concentrated, fixable issues: accessibility failures (skip links, clickable divs), SEO weaknesses across all 18 blog meta descriptions, render-blocking video files, and a nav transparency conflict on sub-pages. Most critical issues require less than an hour of work each.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCORECARD -->
+  <div class="sec">
+    <div class="sec-label">Scorecard by Dimension</div>
+    <div class="scorecard">
+      <table>
+        <thead><tr><th>Dimension</th><th>Score</th><th>Visual</th><th>Status</th><th>Key Finding</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="dim-name">SEO</span></td>
+            <td><span class="score-num-sm">13 / 20</span></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-fill s-warn" style="width:65%"></div></div></div></td>
+            <td><span class="status-badge st-warn">⚠ Warn</span></td>
+            <td class="dim-finding">17 of 18 blog meta descriptions too short; all blog titles over 60 chars; og:site_name missing on homepage; dive.html description 191 chars (over limit)</td>
+          </tr>
+          <tr>
+            <td><span class="dim-name">Performance</span></td>
+            <td><span class="score-num-sm">14 / 20</span></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-fill s-warn" style="width:70%"></div></div></div></td>
+            <td><span class="status-badge st-warn">⚠ Warn</span></td>
+            <td class="dim-finding">preload="auto" on 17 MB and 27 MB hero videos; 17+ mosaic JPEGs without WebP; footer-v3.css and perf-overrides.css are render-blocking</td>
+          </tr>
+          <tr>
+            <td><span class="dim-name">Accessibility</span></td>
+            <td><span class="score-num-sm">11 / 20</span></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-fill s-fail" style="width:55%"></div></div></div></td>
+            <td><span class="status-badge st-fail">✕ Fail</span></td>
+            <td class="dim-finding">Skip links missing on 5 pages (WCAG 2.4.1-A); clickable divs on dive + gallery pages (WCAG 2.1.1-A); gold color fails 4.5:1 contrast at small text sizes in day theme</td>
+          </tr>
+          <tr>
+            <td><span class="dim-name">Mobile</span></td>
+            <td><span class="score-num-sm">15 / 20</span></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-fill s-pass" style="width:75%"></div></div></div></td>
+            <td><span class="status-badge st-warn">⚠ Warn</span></td>
+            <td class="dim-finding">Booking input at 0.85rem triggers iOS Safari auto-zoom; 3 touch targets under 44px (.mob-close, .soc icons, .rm-gallery-btn); rating pills hidden on mobile above fold</td>
+          </tr>
+          <tr>
+            <td><span class="dim-name">Content & UX</span></td>
+            <td><span class="score-num-sm">13 / 20</span></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-fill s-warn" style="width:65%"></div></div></div></td>
+            <td><span class="status-badge st-warn">⚠ Warn</span></td>
+            <td class="dim-finding">404.html is a silent instant redirect (not a branded error page); contact info absent from most pages; no trust badge near booking form; blog posts don't cross-link</td>
+          </tr>
+          <tr>
+            <td><span class="dim-name">Technical</span></td>
+            <td><span class="score-num-sm">12 / 20</span></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-fill s-fail" style="width:60%"></div></div></div></td>
+            <td><span class="status-badge st-fail">✕ Fail</span></td>
+            <td class="dim-finding">Image filenames with spaces/capitals/parentheses risk silent 404s on case-sensitive GitHub Pages server; nav transparency conflict in style.css; site.js theme ID mismatch on index.html</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- STRENGTHS -->
+  <div class="sec">
+    <div class="sec-label">Top 3 Strengths</div>
+    <div class="strengths-grid">
+      <div class="strength-card">
+        <div class="str-num">Strength 01</div>
+        <div class="str-title">Exceptional Schema Markup</div>
+        <div class="str-desc">Hotel, LocalBusiness, SportsActivityLocation, FAQPage, BreadcrumbList, BlogPosting, and ImageGallery types — all with geo coordinates, aggregateRating, amenityFeature, and nested HotelRoom types. Well above average for an independent resort site and positions it for rich results.</div>
+      </div>
+      <div class="strength-card">
+        <div class="str-num">Strength 02</div>
+        <div class="str-title">Solid Performance Architecture</div>
+        <div class="str-desc">Critical CSS inlined above the fold, all scripts deferred/async, fonts loaded with preload + onload async pattern and display=swap, lazy loading and decoding=async on all images, hero images preloaded. The technical foundation is right — issues are configuration, not architecture.</div>
+      </div>
+      <div class="strength-card">
+        <div class="str-num">Strength 03</div>
+        <div class="str-title">Complete Blog Content System</div>
+        <div class="str-desc">20 posts across 8 categories with filter, sort, search, pagination, per-post schema, canonical URLs, and breadcrumbs. Very few independent resort sites have this level of blog infrastructure — it's a durable SEO asset that will compound over time.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRITICAL ISSUES -->
+  <div class="sec">
+    <div class="sec-label">Critical Issues — Must Fix</div>
+
+    <div class="issue-card">
+      <div class="issue-head">
+        <div class="issue-num crit-num">1</div>
+        <div>
+          <div class="issue-title">All 18 blog post meta descriptions are too short (65–120 chars, most under 100)</div>
+          <div style="margin-top:.3rem"><span class="status-badge st-fail">✕ Critical · SEO</span></div>
+        </div>
+      </div>
+      <div class="issue-body">
+        <div class="ib-section">
+          <div class="ib-label">Affected Files</div>
+          <div class="ib-text">All 18 blog posts in <span class="file-pill">/blog/</span>. Worst: <span class="file-pill">underwater-photography-tips-anilao.html</span> at 65 chars. Only <span class="file-pill">pygmy-seahorses-anilao.html</span> passes at 120 chars.</div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Impact</div>
+          <div class="ib-text">Google uses these as search result snippets. Under-100-char descriptions force Google to auto-generate snippets from body text — which are typically worse for CTR. This is the single largest SEO gap on the site.</div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Fix</div>
+          <div class="ib-text">Rewrite each to 120–155 chars with primary keyword + concrete benefit + CTA. Example: "Identify nudibranchs..." (62 chars) → "Spot 80+ nudibranch species at Anilao dive sites — ID tips, best sites & dive conditions for macro photographers in Batangas." (125 chars)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-head">
+        <div class="issue-num crit-num">2</div>
+        <div>
+          <div class="issue-title">Skip links missing on 5 of 6 pages (WCAG 2.4.1 Level A failure)</div>
+          <div style="margin-top:.3rem"><span class="status-badge st-fail">✕ Critical · Accessibility</span></div>
+        </div>
+      </div>
+      <div class="issue-body">
+        <div class="ib-section">
+          <div class="ib-label">Affected Files</div>
+          <div class="ib-text"><span class="file-pill">rooms.html</span><span class="file-pill">dive.html</span><span class="file-pill">gallery.html</span><span class="file-pill">location.html</span><span class="file-pill">blog.html</span></div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Impact</div>
+          <div class="ib-text">Keyboard-only users must tab through 9 nav elements before reaching page content on every page load. WCAG 2.4.1 Level A — the most severe category. index.html already has the .skip-link CSS in style.css.</div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Fix</div>
+          <div class="ib-text">Add <code style="font-family:monospace;font-size:.75rem;background:var(--gray-bg);padding:.1rem .3rem;border-radius:3px">&lt;a href="#main-content" class="skip-link"&gt;Skip to main content&lt;/a&gt;</code> after &lt;body&gt; on each page. Add id="main-content" to the &lt;main&gt; element. 2-line fix per page.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-head">
+        <div class="issue-num crit-num">3</div>
+        <div>
+          <div class="issue-title">Clickable &lt;div&gt; elements not keyboard accessible (WCAG 2.1.1 Level A failure)</div>
+          <div style="margin-top:.3rem"><span class="status-badge st-fail">✕ Critical · Accessibility</span></div>
+        </div>
+      </div>
+      <div class="issue-body">
+        <div class="ib-section">
+          <div class="ib-label">Affected Files</div>
+          <div class="ib-text"><span class="file-pill">dive.html</span> (.eco-card species grid)<br><span class="file-pill">gallery.html</span> (.uw-card photo grid)</div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Impact</div>
+          <div class="ib-text">&lt;div&gt; elements with click handlers cannot receive Tab focus, cannot be activated by Enter/Space, and are invisible to screen readers. Keyboard users cannot access the species modal or the photo modal.</div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Fix</div>
+          <div class="ib-text">Add role="button" tabindex="0" to each .eco-card and .uw-card, plus a keydown handler: if (e.key === 'Enter' || e.key === ' ') card.click(). Or convert to &lt;button&gt; elements (preferred).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-head">
+        <div class="issue-num crit-num">4</div>
+        <div>
+          <div class="issue-title">Image filenames with spaces, capitals, and special characters — silent 404 risk on GitHub Pages</div>
+          <div style="margin-top:.3rem"><span class="status-badge st-fail">✕ Critical · Technical</span></div>
+        </div>
+      </div>
+      <div class="issue-body">
+        <div class="ib-section">
+          <div class="ib-label">Affected Files</div>
+          <div class="ib-text"><span class="file-pill">images/Nature Folder/</span><span class="file-pill">images/Hero Image/</span><span class="file-pill">images/Home Page Image Gallery/</span><span class="file-pill">images/rooms/01. Standard Double.../</span> and more</div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Impact</div>
+          <div class="ib-text">GitHub Pages runs on Linux — case-sensitive. Filenames like "Bargibant's pygmy seahorse (Hippocampus bargibanti).jpg" contain apostrophes, parentheses, and capitals. A single capitalization mismatch = silent 404 in production.</div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Fix</div>
+          <div class="ib-text">Batch-rename all image files and directories to lowercase-with-hyphens. Run a script to find all HTML/CSS references and update them to match. This is the only FAIL in the technical audit.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-head">
+        <div class="issue-num crit-num">5</div>
+        <div>
+          <div class="issue-title">preload="auto" on 17 MB and 27 MB hero videos forces full download on page load</div>
+          <div style="margin-top:.3rem"><span class="status-badge st-fail">✕ Critical · Performance</span></div>
+        </div>
+      </div>
+      <div class="issue-body">
+        <div class="ib-section">
+          <div class="ib-label">Affected Files</div>
+          <div class="ib-text"><span class="file-pill">dive.html</span> (dive-hero.mp4 — 17.5 MB)<br><span class="file-pill">gallery.html</span> (gallery-hero.mp4 — 27.2 MB)</div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Impact</div>
+          <div class="ib-text">preload="auto" downloads the entire video before the user interacts. On mobile, that's a 17–27 MB download triggered automatically. Causes severe LCP and TTI penalties and likely fails Core Web Vitals on mobile.</div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Fix</div>
+          <div class="ib-text">Change preload="auto" to preload="none" on both &lt;video&gt; elements. The browser will still autoplay (autoplay, muted, playsinline, loop, and poster are already set correctly). 1-word change per file.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-head">
+        <div class="issue-num crit-num">6</div>
+        <div>
+          <div class="issue-title">404.html is a silent instant redirect — not a real error page</div>
+          <div style="margin-top:.3rem"><span class="status-badge st-fail">✕ Critical · Content & UX</span></div>
+        </div>
+      </div>
+      <div class="issue-body">
+        <div class="ib-section">
+          <div class="ib-label">Affected Files</div>
+          <div class="ib-text"><span class="file-pill">404.html</span></div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Impact</div>
+          <div class="ib-text">Broken links redirect silently to homepage. Users following dead bookmarks get no explanation. Google Search Console will report soft 404s — a signal Google uses to assess content quality.</div>
+        </div>
+        <div class="ib-section">
+          <div class="ib-label">Fix</div>
+          <div class="ib-text">Build a branded 404 page with nav, an on-brand message ("This cove is hidden"), popular page links (Dive, Rooms, Blog, Location), and a Book Now CTA. Remove the meta refresh and JS redirect. Keep &lt;meta name="robots" content="noindex"&gt;.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARNINGS -->
+  <div class="sec">
+    <div class="sec-label">Warnings — Should Fix</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W1</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">dive.html & gallery.html meta descriptions over 155 chars (191 and 180)</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ SEO</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">Google truncates at ~155 chars, cutting off the CTA on dive.html. Trim to under 155 chars preserving keyword and CTA.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W2</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">og:site_name missing on index.html (present on all other pages)</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ SEO</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">Homepage renders without site name on Facebook/WhatsApp previews. Add &lt;meta property="og:site_name" content="Casa Escondida Anilao" /&gt;. One-line fix.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W3</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">H1 keyword weakness on index.html, gallery.html, location.html</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ SEO</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">Desktop H1 on homepage is "Casa Escondida" only. Gallery H1 is "Life at Casa Escondida". Location H1 is atmospheric ("A Hidden Cove in Batangas Bay"). All miss primary keyword opportunities.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W4</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">Room count inconsistency: 31 (meta) vs 24 (on-page stat)</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Content</span> <span class="status-badge" style="background:#ede9fe;color:#6d28d9">rooms.html</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">Meta description says "31 ocean-side rooms" but the hero stat says "24 Rooms & Suites" and schema only lists 3 room types. Factual inconsistency visible in search results.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W5</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">Gold color fails WCAG 4.5:1 contrast at small text in day theme</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Accessibility</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">#b8862a on #f5f0ea = ~3.1:1 contrast ratio. WCAG 1.4.3 requires 4.5:1. Darken to #7a5a18 for day theme. Night theme gold passes (11.7:1) — no change needed there.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W6</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">outline:none on form inputs without focus replacement</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Accessibility</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">index.html (.b-input), location.html (.cf-input, .cf-textarea), blog.html (.sort-select). Add :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px } to all form controls.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W7</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">rooms.html heading hierarchy skips levels (div → H4)</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Accessibility</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">Room names (.rm-name) are &lt;div&gt; elements, not H3. Inclusions strip uses H4 with no H2/H3 parent. Breaks semantic outline for screen readers (WCAG 1.3.1).</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W8</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">Booking input at 0.85rem triggers iOS Safari auto-zoom</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Mobile</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">iOS Safari zooms viewport on any input below 16px. Booking form is the #1 conversion point — jarring zoom on tap hurts UX. Fix: .b-input { font-size: 1rem }. Visual change is minimal.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W9</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">3 touch targets below 44px (.mob-close, .soc icons, .rm-gallery-btn)</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Mobile</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">.mob-close: 38×38px, .soc footer icons: 36×36px, .rm-gallery-btn carousel arrows: 30×30px. Add min-width: 44px; min-height: 44px to all three.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W10</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">Nav not transparent on sub-pages — style.css conflict</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Technical</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">style.css applies backdrop-filter: blur() to base #nav — not just #nav.scrolled. Nav loads with frosted-glass on rooms, dive, gallery, location, blog. Move background + backdrop-filter to #nav.scrolled only.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W11</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">site.js theme ID mismatch on index.html (themeBtn vs themeToggle)</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Technical</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">site.js queries getElementById('themeBtn') but index.html uses id="themeToggle". Works only because index.html has its own inline handler. If cleaned up, theme toggle breaks on homepage.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W12</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">CSS variable naming divergence: index.html vs style.css</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Technical</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">index.html uses --bg-primary, --text-primary; style.css uses --bg, --text. Latent maintenance bug — any shared component referencing --bg-primary will silently fail on sub-pages.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W13</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">Phone and email absent from footer — missing on most pages</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Content</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">Footer has no phone or email. A visitor on rooms.html or dive.html who wants to call must navigate to location.html. Two lines in footer-v3.css would fix this on every page.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W14</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">17+ mosaic JPEGs without WebP + Suiteroom_New.jpg at 478 KB</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Performance</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">Mosaic gallery images and room cards are uncompressed JPEGs. Suiteroom_New.jpg at 478 KB is referenced twice. WebP typically saves 25–35%. Wrap in &lt;picture&gt; elements with WebP source.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W15</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">Rating pills (4.5★ TripAdvisor) hidden on mobile above the fold</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ Mobile / UX</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">display:none at max-width:768px. Mobile users — likely the majority — see no social proof above the fold. Reformat for mobile (smaller, stacked) instead of hiding entirely.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-head" style="border-bottom:none">
+          <div class="issue-num warn-num">W16</div>
+          <div>
+            <div class="issue-title" style="font-size:.82rem">Blog posts don't cross-link to each other (topical cluster gap)</div>
+            <div style="margin-top:.3rem"><span class="status-badge st-warn">⚠ SEO / Content</span></div>
+            <div class="ib-text" style="margin-top:.5rem;font-size:.76rem">"Best Dive Sites" doesn't link to "Kirby's Rock". "Night Diving" doesn't link to "What to Pack". Internal cross-links build topical cluster authority signals for Google.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BLOG META TABLE -->
+  <div class="sec">
+    <div class="sec-label">Blog Post Meta Audit — All 18 Posts</div>
+    <div class="blog-table">
+      <table>
+        <thead><tr><th>Blog Post</th><th>Title Chars</th><th>Title</th><th>Desc Chars</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>best-dive-sites-anilao</td><td>84</td><td><span class="status-badge st-fail">✕ Over</span></td><td>82</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>nudibranchs-anilao</td><td>74</td><td><span class="status-badge st-fail">✕ Over</span></td><td>91</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>manila-to-anilao-transfer-guide</td><td>70</td><td><span class="status-badge st-fail">✕ Over</span></td><td>163</td><td><span class="status-badge st-warn">⚠ Over</span></td></tr>
+          <tr><td>night-diving-anilao</td><td>73</td><td><span class="status-badge st-fail">✕ Over</span></td><td>114</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>best-time-dive-anilao</td><td>79</td><td><span class="status-badge st-fail">✕ Over</span></td><td>102</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>whale-sharks-batangas</td><td>74</td><td><span class="status-badge st-fail">✕ Over</span></td><td>84</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>underwater-photography-tips-anilao</td><td>75</td><td><span class="status-badge st-fail">✕ Over</span></td><td>65</td><td><span class="status-badge st-fail">✕ Critical</span></td></tr>
+          <tr><td>frogfish-anilao</td><td>77</td><td><span class="status-badge st-fail">✕ Over</span></td><td>107</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>anilao-dive-trip-cost</td><td>84</td><td><span class="status-badge st-fail">✕ Over</span></td><td>108</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>padi-open-water-course-casa-escondida</td><td>85</td><td><span class="status-badge st-fail">✕ Over</span></td><td>81</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>macro-photography-settings-anilao</td><td>87</td><td><span class="status-badge st-fail">✕ Over</span></td><td>114</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>batangas-coral-restoration-2025</td><td>72</td><td><span class="status-badge st-fail">✕ Over</span></td><td>98</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>new-dive-deck-equipment-2026</td><td>90</td><td><span class="status-badge st-fail">✕ Over</span></td><td>112</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>island-bbq-casa-escondida</td><td>59</td><td><span class="status-badge st-pass">✓ Pass</span></td><td>77</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>what-to-pack-batangas-diving</td><td>63</td><td><span class="status-badge st-fail">✕ Over</span></td><td>74</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>protecting-coral-triangle</td><td>73</td><td><span class="status-badge st-fail">✕ Over</span></td><td>82</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>full-day-casa-escondida</td><td>70</td><td><span class="status-badge st-fail">✕ Over</span></td><td>116</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr><td>anilao-underwater-festival-2026</td><td>81</td><td><span class="status-badge st-fail">✕ Over</span></td><td>96</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+          <tr style="background:#f0fdf4"><td>pygmy-seahorses-anilao</td><td>85</td><td><span class="status-badge st-fail">✕ Over</span></td><td>120</td><td><span class="status-badge st-pass">✓ Pass</span></td></tr>
+          <tr><td>kirbys-rock-anilao</td><td>85</td><td><span class="status-badge st-fail">✕ Over</span></td><td>105</td><td><span class="status-badge st-warn">⚠ Short</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.72rem;color:var(--text2);margin-top:.6rem;padding:0 .2rem">Title target: ≤60 chars. Description target: 120–155 chars. Root cause of title failures: brand suffix " | Casa Escondida Anilao" = 22 chars, leaving only 38 chars for article title. Shorten to " | CE Anilao" (11 chars).</p>
+  </div>
+
+  <!-- PASSING ITEMS -->
+  <div class="sec">
+    <div class="sec-label">Passing — Working Well</div>
+    <div class="pass-grid">
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Schema markup — Hotel, LocalBusiness, FAQPage, BreadcrumbList, BlogPosting, ImageGallery all correctly implemented</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>All scripts deferred/async — no render-blocking JavaScript in &lt;head&gt;</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Font loading — preconnect + preload+onload async + display=swap + noscript fallback all correct</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Critical CSS inlined — all above-fold styles inline, no external CSS needed to render hero</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Canonical URLs — correct and present on all 26 pages</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Open Graph tags — present on all 6 main pages and all 20 blog posts</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>ARIA attributes — aria-label, aria-expanded, aria-controls, aria-hidden, role="dialog" used correctly throughout</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>All buttons labeled — no unlabeled icon-only buttons on any page</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Image lazy loading — loading="lazy" on all appropriate images; loading="eager" on logos</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>sitemap.xml and robots.txt — complete, correct, all 26 pages indexed</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>HTTPS throughout — no mixed-content http:// internal references</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Mobile nav — hamburger ARIA correct, JS toggle handles open/close and outside-click dismissal</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>svh/dvh hero heights — 100svh with 100vh fallback, min-height safety nets applied</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Blog infrastructure — 20 posts, 8 categories, filter/sort/search/pagination, breadcrumbs per post</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Social links — all 4 platforms with rel="noopener noreferrer" and aria-label on every page</div>
+      <div class="pass-item"><span class="pass-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>perf-overrides.css — proactively disables looping decorative animations globally</div>
+    </div>
+  </div>
+
+  <!-- PRIORITY ACTION PLAN -->
+  <div class="sec">
+    <div class="sec-label">Priority Action Plan — Top 10</div>
+    <div class="priority-table">
+      <table>
+        <thead><tr><th>#</th><th>Task</th><th>Impact</th><th>Effort</th><th>Category</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="rank-badge">1</span></td>
+            <td><strong>Rewrite all 18 blog meta descriptions</strong> — expand teaser sentences to 120–155 chars with keyword + benefit + CTA</td>
+            <td><span class="impact-high">Very High</span></td>
+            <td><span class="effort-pill ef-m">Medium</span></td>
+            <td><span class="cat-pill">SEO</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge">2</span></td>
+            <td><strong>Add skip links</strong> to rooms, dive, gallery, location, blog — &lt;a href="#main-content" class="skip-link"&gt; after &lt;body&gt; + id on &lt;main&gt;</td>
+            <td><span class="impact-high">High</span></td>
+            <td><span class="effort-pill ef-vl">Very Low</span></td>
+            <td><span class="cat-pill">Accessibility</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge">3</span></td>
+            <td><strong>Fix .eco-card and .uw-card</strong> — add role="button" tabindex="0" + keydown handler, or convert to &lt;button&gt; elements</td>
+            <td><span class="impact-high">High</span></td>
+            <td><span class="effort-pill ef-l">Low</span></td>
+            <td><span class="cat-pill">Accessibility</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge">4</span></td>
+            <td><strong>Change preload="auto" → preload="none"</strong> on dive-hero.mp4 (17 MB) and gallery-hero.mp4 (27 MB)</td>
+            <td><span class="impact-high">High</span></td>
+            <td><span class="effort-pill ef-vl">Very Low</span></td>
+            <td><span class="cat-pill">Performance</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge">5</span></td>
+            <td><strong>Fix nav transparency in style.css</strong> — move background + backdrop-filter from #nav to #nav.scrolled only</td>
+            <td><span class="impact-high">High</span></td>
+            <td><span class="effort-pill ef-vl">Very Low</span></td>
+            <td><span class="cat-pill">Technical</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge">6</span></td>
+            <td><strong>Fix .b-input font-size</strong> from 0.85rem → 1rem to prevent iOS Safari auto-zoom on booking form</td>
+            <td><span class="impact-high">High</span></td>
+            <td><span class="effort-pill ef-vl">Very Low</span></td>
+            <td><span class="cat-pill">Mobile</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge">7</span></td>
+            <td><strong>Shorten blog title suffix</strong> from " | Casa Escondida Anilao" (22 chars) to " | CE Anilao" (11 chars) — brings most titles under 60 chars</td>
+            <td><span class="impact-med">Medium</span></td>
+            <td><span class="effort-pill ef-l">Low</span></td>
+            <td><span class="cat-pill">SEO</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge">8</span></td>
+            <td><strong>Build proper 404 page</strong> — remove silent redirect, add branded message, nav links, and Book Now CTA</td>
+            <td><span class="impact-med">Medium</span></td>
+            <td><span class="effort-pill ef-m">Medium</span></td>
+            <td><span class="cat-pill">Content</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge">9</span></td>
+            <td><strong>Add phone + email to footer</strong> (footer-v3.css) — propagates contact info to every page instantly</td>
+            <td><span class="impact-med">Medium</span></td>
+            <td><span class="effort-pill ef-vl">Very Low</span></td>
+            <td><span class="cat-pill">Content</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge">10</span></td>
+            <td><strong>Rename image files</strong> — batch rename /images/ directories to lowercase-hyphen; eliminate spaces, capitals, parentheses, apostrophes</td>
+            <td><span class="impact-high">High</span></td>
+            <td><span class="effort-pill ef-h">High</span></td>
+            <td><span class="cat-pill">Technical</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Prepared by <strong>TechNext SG</strong> · hello@technext.asia · June 2, 2026 &nbsp;|&nbsp;
+  7 audit agents · 278 tool uses · 26 pages reviewed &nbsp;|&nbsp; Confidential
+</footer>
+
+</body>
+</html>
