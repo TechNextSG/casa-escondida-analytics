@@ -167,7 +167,16 @@
       background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
       border-radius: 10px; padding: 1.4rem;
     }
-    .fb-card-icon { font-size: 1.4rem; margin-bottom: .6rem; }
+    .fb-card-icon { width: 32px; height: 32px; margin-bottom: .7rem; }
+    .fb-card-icon svg { width: 100%; height: 100%; stroke: var(--teal); }
+    .ic { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ic svg { display: block; }
+    .ic-sm svg { width: 14px; height: 14px; }
+    .ic-md svg { width: 18px; height: 18px; }
+    .ic-lg svg { width: 22px; height: 22px; }
+    .data-card-head .ic { margin-right: .4rem; }
+    .section-title .ic { margin-right: .35rem; }
+    .device-name .ic { margin-right: .4rem; vertical-align: middle; }
     .fb-card-title { font-size: .82rem; font-weight: 700; color: var(--teal); margin-bottom: .4rem; }
     .fb-card-text { font-size: .78rem; color: rgba(255,255,255,.65); line-height: 1.65; }
     .fb-why { margin-bottom: 2rem; }
@@ -191,7 +200,7 @@
       background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
       border-radius: 8px; padding: 1rem; text-align: center;
     }
-    .fb-aud-flag { font-size: 1.4rem; margin-bottom: .3rem; }
+    .fb-aud-flag { font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); margin-bottom: .4rem; font-weight: 700; }
     .fb-aud-country { font-size: .75rem; font-weight: 700; color: white; margin-bottom: .2rem; }
     .fb-aud-note { font-size: .68rem; color: rgba(255,255,255,.55); line-height: 1.5; }
     .fb-budget {
@@ -337,7 +346,7 @@
     <div class="two-col">
       <div class="data-card">
         <div class="data-card-head">
-          <span>🔍 Top Search Queries</span>
+          <span style="display:flex;align-items:center;gap:.4rem"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Top Search Queries</span>
           <span style="font-size:.7rem;color:var(--text2);font-weight:400">May 2026</span>
         </div>
         <table>
@@ -357,7 +366,7 @@
 
       <div class="data-card">
         <div class="data-card-head">
-          <span>📄 Top Pages by Traffic</span>
+          <span style="display:flex;align-items:center;gap:.4rem"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>Top Pages by Traffic</span>
           <span style="font-size:.7rem;color:var(--text2);font-weight:400">May 2026</span>
         </div>
         <table>
@@ -402,7 +411,7 @@
     <div class="section-title">Audience Insights</div>
     <div class="two-col">
       <div class="data-card">
-        <div class="data-card-head"><span>🌍 Top Countries</span></div>
+        <div class="data-card-head"><span style="display:flex;align-items:center;gap:.4rem"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>Top Countries</span></div>
         <table>
           <thead><tr><th>Country</th><th class="td-right">Clicks</th><th class="td-right">CTR</th><th>Share</th></tr></thead>
           <tbody>
@@ -439,11 +448,11 @@
       </div>
 
       <div class="data-card">
-        <div class="data-card-head"><span>📱 Device Breakdown</span></div>
+        <div class="data-card-head"><span style="display:flex;align-items:center;gap:.4rem"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>Device Breakdown</span></div>
         <div class="device-row">
           <div class="device-item">
             <div class="device-header">
-              <span class="device-name">🖥 Desktop</span>
+              <span class="device-name" style="display:flex;align-items:center;gap:.35rem"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>Desktop</span>
               <span class="device-stats">51 clicks · 545 imp · <strong style="color:var(--green)">9.36% CTR</strong></span>
             </div>
             <div class="device-bar-bg"><div class="device-bar d-desktop" style="width:89%"></div></div>
@@ -451,7 +460,7 @@
           </div>
           <div class="device-item">
             <div class="device-header">
-              <span class="device-name">📱 Mobile</span>
+              <span class="device-name" style="display:flex;align-items:center;gap:.35rem"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>Mobile</span>
               <span class="device-stats">40 clicks · 609 imp · 6.57% CTR</span>
             </div>
             <div class="device-bar-bg"><div class="device-bar d-mobile" style="width:66%"></div></div>
@@ -459,14 +468,14 @@
           </div>
           <div class="device-item">
             <div class="device-header">
-              <span class="device-name">📟 Tablet</span>
+              <span class="device-name" style="display:flex;align-items:center;gap:.35rem"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>Tablet</span>
               <span class="device-stats">0 clicks · 12 imp · 0% CTR</span>
             </div>
             <div class="device-bar-bg"><div class="device-bar d-tablet" style="width:8%"></div></div>
             <div style="font-size:.7rem;color:var(--text2);margin-top:.3rem">Very small audience — minor concern</div>
           </div>
           <div style="background:#f8fafc;border-radius:8px;padding:1rem;margin-top:.5rem">
-            <div style="font-size:.72rem;font-weight:700;color:var(--navy);margin-bottom:.4rem">💡 Key Insight</div>
+            <div style="font-size:.72rem;font-weight:700;color:var(--navy);margin-bottom:.4rem;display:flex;align-items:center;gap:.35rem"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></span>Key Insight</div>
             <div style="font-size:.75rem;color:var(--text2);line-height:1.65">Mobile gets <strong style="color:var(--navy)">more eyes</strong> but fewer clicks. Optimising mobile page descriptions and load speed will directly improve bookings from mobile users.</div>
           </div>
         </div>
@@ -485,24 +494,24 @@
 
     <div class="fb-cards">
       <div class="fb-card">
-        <div class="fb-card-icon">📊</div>
+        <div class="fb-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
         <div class="fb-card-title">The Gap We Need to Bridge</div>
         <div class="fb-card-text">85 organic clicks/month is a strong start. But to fill rooms consistently, the resort needs 500–1,000+ qualified visitors per month. Facebook Ads can bridge that gap <em>today</em> — not in 12 months.</div>
       </div>
       <div class="fb-card">
-        <div class="fb-card-icon">🎯</div>
+        <div class="fb-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
         <div class="fb-card-title">Precision Targeting Available</div>
         <div class="fb-card-text">Facebook lets us target by location (SG, HK, PH), interests (scuba diving, PADI, underwater photography, travel), and behaviors (frequent travelers, diving club members). Your ideal guest, directly in their feed.</div>
       </div>
       <div class="fb-card">
-        <div class="fb-card-icon">⚡</div>
+        <div class="fb-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <div class="fb-card-title">Results in Days, Not Months</div>
         <div class="fb-card-text">Unlike SEO which compounds over time, a Facebook campaign can drive resort inquiries within 48–72 hours of launch. Ideal for filling specific dates, promoting dive packages, or peak season campaigns.</div>
       </div>
     </div>
 
     <div class="fb-why">
-      <div class="fb-why-title">🔍 What The Data Tells Us About Facebook Ads Potential</div>
+      <div class="fb-why-title" style="display:flex;align-items:center;gap:.5rem"><span class="ic ic-sm" style="opacity:.8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>What The Data Tells Us About Facebook Ads Potential</div>
       <div class="fb-reasons">
         <div class="fb-reason">
           <div class="fb-reason-dot">1</div>
@@ -524,25 +533,25 @@
     </div>
 
     <div class="fb-audience">
-      <div class="fb-audience-title">🌍 Recommended Target Audiences for Facebook Ads</div>
+      <div class="fb-audience-title" style="display:flex;align-items:center;gap:.5rem"><span class="ic ic-sm" style="opacity:.8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>Recommended Target Audiences for Facebook Ads</div>
       <div class="fb-audience-grid">
         <div class="fb-aud-card">
-          <div class="fb-aud-flag">🇵🇭</div>
+          <div class="fb-aud-flag">PH</div>
           <div class="fb-aud-country">Philippines</div>
           <div class="fb-aud-note">Metro Manila divers, PADI certified, weekend travelers. High volume, lower cost.</div>
         </div>
         <div class="fb-aud-card">
-          <div class="fb-aud-flag">🇸🇬</div>
+          <div class="fb-aud-flag">SG</div>
           <div class="fb-aud-country">Singapore</div>
           <div class="fb-aud-note">Already converts at 25% CTR. Scale this audience with ads — highest ROI potential.</div>
         </div>
         <div class="fb-aud-card">
-          <div class="fb-aud-flag">🇭🇰</div>
+          <div class="fb-aud-flag">HK</div>
           <div class="fb-aud-country">Hong Kong</div>
           <div class="fb-aud-note">20% CTR on Google. Premium diving market actively looking for SE Asia options.</div>
         </div>
         <div class="fb-aud-card">
-          <div class="fb-aud-flag">🇦🇺</div>
+          <div class="fb-aud-flag">AU</div>
           <div class="fb-aud-country">Australia</div>
           <div class="fb-aud-note">Strong diving culture. Currently seeing your site but not enough visibility to click. Ads can change this.</div>
         </div>
@@ -550,7 +559,7 @@
     </div>
 
     <div class="fb-budget">
-      <div class="fb-budget-title">💰 Suggested Starting Budget (Test Campaign — 1 Month)</div>
+      <div class="fb-budget-title" style="display:flex;align-items:center;gap:.5rem"><span class="ic ic-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>Suggested Starting Budget (Test Campaign — 1 Month)</div>
       <div class="fb-budget-items">
         <div class="fb-budget-item">
           <div class="fb-budget-label">Recommended Monthly Ad Spend</div>
