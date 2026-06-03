@@ -1,359 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Changelog — Casa Escondida Anilao</title>
   <style>
-    :root {
-      --navy:   #0d1e2e;
-      --navy2:  #1a3050;
-      --teal:   #4dc8e8;
-      --teal-d: #2fa8c8;
-      --gold:   #e8c56a;
-      --bg:     #f4f7fa;
-      --card:   #ffffff;
-      --text:   #1a2b3c;
-      --text2:  #4a6070;
-      --border: #dde5ee;
-      --green:  #22c55e;
-      --green-bg: #dcfce7;
-      --green-text: #15803d;
-      --blue-bg:  #dbeafe;
-      --blue-text: #1d4ed8;
-      --purple-bg: #ede9fe;
-      --purple-text: #6d28d9;
-      --orange-bg: #ffedd5;
-      --orange-text: #c2410c;
-      --pink-bg: #fce7f3;
-      --pink-text: #be185d;
-      --gray-bg: #f1f5f9;
-      --gray-text: #475569;
+    :root{
+      --navy:#0d1e2e;--navy2:#1a3050;--teal:#4dc8e8;--teal-d:#2fa8c8;
+      --gold:#e8c56a;--bg:#f4f7fa;--card:#fff;--text:#1a2b3c;--text2:#4a6070;
+      --border:#dde5ee;
+      --c-feat:#dbeafe;--ct-feat:#1d4ed8;
+      --c-fix:#dcfce7;--ct-fix:#15803d;
+      --c-design:#fce7f3;--ct-design:#be185d;
+      --c-i18n:#ecfdf5;--ct-i18n:#065f46;
+      --c-perf:#ede9fe;--ct-perf:#6d28d9;
+      --c-seo:#fef9c3;--ct-seo:#92400e;
+      --c-mobile:#fff7ed;--ct-mobile:#c2410c;
+      --c-content:#f1f5f9;--ct-content:#475569;
+      --c-video:#f0fdf4;--ct-video:#166534;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;}
 
-    /* HEADER */
-    header {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
-      padding: 2.5rem 3rem; color: white; position: relative; overflow: hidden;
-    }
-    header::before {
-      content: ''; position: absolute; top: -60px; right: -60px;
-      width: 260px; height: 260px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(77,200,232,.15) 0%, transparent 70%);
-    }
-    .header-eyebrow { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-bottom: .5rem; }
-    .header-title { font-size: 1.8rem; font-weight: 700; margin-bottom: .3rem; }
-    .header-title span { color: var(--teal); }
-    .header-sub { color: rgba(255,255,255,.55); font-size: .85rem; }
-    .header-meta { display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
-    .meta-item { display: flex; flex-direction: column; gap: .1rem; }
-    .meta-label { font-size: .58rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.38); }
-    .meta-value { font-size: .82rem; color: rgba(255,255,255,.85); font-weight: 500; }
+    /* ── HEADER ── */
+    header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);padding:2.8rem 3rem 2.2rem;color:#fff;position:relative;overflow:hidden;}
+    header::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(77,200,232,.12) 0%,transparent 70%);}
+    .h-eye{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem;}
+    .h-title{font-size:1.9rem;font-weight:700;margin-bottom:.3rem;}
+    .h-title span{color:var(--teal);}
+    .h-sub{color:rgba(255,255,255,.5);font-size:.85rem;margin-bottom:1.8rem;}
+    .h-stats{display:flex;gap:2.5rem;flex-wrap:wrap;}
+    .hs{display:flex;flex-direction:column;}
+    .hs-n{font-size:1.5rem;font-weight:700;color:var(--teal);line-height:1;}
+    .hs-l{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.2rem;}
 
-    /* LAYOUT */
-    .container { max-width: 1040px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    /* ── CONTROLS ── */
+    .wrap{max-width:1120px;margin:0 auto;padding:2rem 1.5rem 5rem;}
+    .controls{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;margin-bottom:2rem;display:flex;flex-direction:column;gap:.9rem;}
+    .ctrl-row{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+    .ctrl-label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text2);font-weight:700;min-width:55px;flex-shrink:0;}
+    .pills{display:flex;gap:.4rem;flex-wrap:wrap;flex:1;}
+    .pill{padding:.3rem .9rem;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.72rem;font-weight:500;cursor:pointer;transition:all .18s;font-family:inherit;white-space:nowrap;}
+    .pill:hover{border-color:var(--teal);color:var(--teal);}
+    .pill.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+    .search-wrap{display:flex;align-items:center;gap:.5rem;flex:1;max-width:320px;}
+    .search-box{flex:1;padding:.38rem .85rem;border-radius:8px;border:1px solid var(--border);background:var(--bg);font-size:.8rem;font-family:inherit;color:var(--text);transition:border-color .2s;}
+    .search-box:focus{outline:none;border-color:var(--teal);}
+    .count-badge{font-size:.72rem;color:var(--text2);white-space:nowrap;background:var(--bg);padding:.25rem .7rem;border-radius:20px;border:1px solid var(--border);}
 
-    /* SUMMARY PILLS */
-    .summary { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .s-pill {
-      display: flex; align-items: center; gap: .45rem;
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 40px; padding: .45rem 1rem; font-size: .78rem; font-weight: 600;
-    }
-    .s-dot { width: 8px; height: 8px; border-radius: 50%; }
+    /* ── LEGEND ── */
+    .legend{display:flex;gap:.5rem;flex-wrap:wrap;padding:.6rem 0 .2rem;}
+    .legend-item{display:flex;align-items:center;gap:.3rem;font-size:.65rem;color:var(--text2);}
+    .legend-dot{width:8px;height:8px;border-radius:50%;}
 
-    /* FILTER BAR */
-    .filter-bar { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .filter-btn {
-      padding: .4rem 1rem; border-radius: 40px; border: 1px solid var(--border);
-      background: var(--card); color: var(--text2); font-size: .75rem; font-weight: 500;
-      cursor: pointer; transition: all .2s; font-family: inherit;
-    }
-    .filter-btn:hover, .filter-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
+    /* ── MONTH GROUP ── */
+    .month-group{margin-bottom:2.8rem;}
+    .month-group.hidden{display:none;}
+    .month-hdr{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;}
+    .month-tag{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--teal-d);}
+    .month-line{flex:1;height:1px;background:var(--border);}
+    .month-cnt{font-size:.65rem;background:var(--bg);color:var(--text2);padding:.15rem .6rem;border-radius:20px;border:1px solid var(--border);}
 
-    /* TIMELINE */
-    .timeline { display: flex; flex-direction: column; gap: 0; }
-    .tl-group { margin-bottom: 2rem; }
-    .tl-date {
-      font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
-      color: var(--teal-d); font-weight: 700; margin-bottom: .8rem;
-      display: flex; align-items: center; gap: .6rem;
-    }
-    .tl-date::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    /* ── DAY LABEL ── */
+    .day-lbl{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;color:var(--text2);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.32rem .85rem;margin-bottom:.7rem;margin-top:.5rem;}
+    .day-lbl svg{width:13px;height:13px;stroke:var(--teal);fill:none;stroke-width:2;}
 
-    .tl-item {
-      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-      padding: 1.1rem 1.4rem; margin-bottom: .6rem;
-      display: grid; grid-template-columns: auto 1fr auto; gap: .8rem 1.2rem;
-      align-items: start; transition: box-shadow .2s;
-    }
-    .tl-item:hover { box-shadow: 0 2px 12px rgba(0,0,0,.06); }
-    .tl-item.tl-left { border-left: 3px solid; }
+    /* ── CHANGE CARD ── */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:.55rem;display:grid;grid-template-columns:auto 1fr auto;gap:.8rem;align-items:start;transition:box-shadow .18s;}
+    .card:hover{box-shadow:0 2px 14px rgba(0,0,0,.07);}
+    .card.hidden{display:none;}
 
-    .cat-tag {
-      display: inline-flex; align-items: center; gap: .3rem;
-      padding: .2rem .65rem; border-radius: 20px; font-size: .67rem;
-      font-weight: 600; letter-spacing: .04em; white-space: nowrap;
-    }
-    .cat-seo      { background: var(--blue-bg);   color: var(--blue-text);   border-left-color: #3b82f6; }
-    .cat-ux       { background: var(--purple-bg);  color: var(--purple-text); border-left-color: #8b5cf6; }
-    .cat-mobile   { background: var(--orange-bg);  color: var(--orange-text); border-left-color: #f97316; }
-    .cat-perf     { background: var(--green-bg);   color: var(--green-text);  border-left-color: #22c55e; }
-    .cat-content  { background: var(--pink-bg);    color: var(--pink-text);   border-left-color: #ec4899; }
-    .cat-ai       { background: #f0fdf4;            color: #166534;            border-left-color: #16a34a; }
+    .badge{display:inline-flex;align-items:center;padding:.22rem .7rem;border-radius:20px;font-size:.63rem;font-weight:700;white-space:nowrap;letter-spacing:.03em;}
+    .feat  {background:var(--c-feat);color:var(--ct-feat);}
+    .fix   {background:var(--c-fix);color:var(--ct-fix);}
+    .design{background:var(--c-design);color:var(--ct-design);}
+    .i18n  {background:var(--c-i18n);color:var(--ct-i18n);}
+    .perf  {background:var(--c-perf);color:var(--ct-perf);}
+    .seo   {background:var(--c-seo);color:var(--ct-seo);}
+    .mobile{background:var(--c-mobile);color:var(--ct-mobile);}
+    .content{background:var(--c-content);color:var(--ct-content);}
+    .video {background:var(--c-video);color:var(--ct-video);}
 
-    .tl-body { }
-    .tl-title { font-size: .88rem; font-weight: 700; color: var(--navy); margin-bottom: .25rem; }
-    .tl-desc  { font-size: .78rem; color: var(--text2); line-height: 1.65; }
-    .tl-files { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: .5rem; }
-    .tl-file {
-      font-size: .65rem; background: var(--gray-bg); color: var(--gray-text);
-      border-radius: 4px; padding: .15rem .5rem; font-family: 'Consolas', monospace;
-    }
+    .card-body{}
+    .card-title{font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:.22rem;}
+    .card-desc{font-size:.77rem;color:var(--text2);line-height:1.65;}
+    .card-files{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.45rem;}
+    .ftag{font-family:'Consolas',monospace;font-size:.65rem;background:var(--bg);color:var(--text2);border-radius:4px;padding:.1rem .45rem;border:1px solid var(--border);}
+    .hash{font-family:'Consolas',monospace;font-size:.65rem;color:var(--text2);background:var(--bg);padding:.18rem .55rem;border-radius:6px;text-decoration:none;border:1px solid var(--border);white-space:nowrap;flex-shrink:0;}
+    .hash:hover{color:var(--teal);border-color:var(--teal);}
 
-    .status-done {
-      display: inline-flex; align-items: center; gap: .3rem;
-      background: var(--green-bg); color: var(--green-text);
-      font-size: .65rem; font-weight: 700; padding: .2rem .6rem; border-radius: 20px;
-      white-space: nowrap;
-    }
-
-    /* PRINT */
-    @media print {
-      body { background: white; }
-      header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    }
+    footer{background:var(--navy);color:rgba(255,255,255,.4);text-align:center;padding:1.2rem;font-size:.72rem;}
+    footer strong{color:var(--teal);}
+    @media(max-width:640px){.card{grid-template-columns:1fr;} .h-stats{gap:1.5rem;}}
   </style>
 </head>
 <body>
 
 <header>
-  <div class="header-eyebrow">TechNext SG · Project Log</div>
-  <div class="header-title">Website <span>Changelog</span></div>
-  <div class="header-sub">casaescondida-anilao.com — All changes tracked from project start</div>
-  <div class="header-meta">
-    <div class="meta-item"><span class="meta-label">Client</span><span class="meta-value">Casa Escondida Anilao</span></div>
-    <div class="meta-item"><span class="meta-label">Repository</span><span class="meta-value">github.com/TechNextSG/casa-escondida-anilao</span></div>
-    <div class="meta-item"><span class="meta-label">Last Updated</span><span class="meta-value">June 2, 2026</span></div>
-    <div class="meta-item"><span class="meta-label">Total Changes</span><span class="meta-value">20 updates across 6 categories</span></div>
+  <div class="h-eye">TechNext SG · Project Log</div>
+  <div class="h-title">Website <span>Changelog</span></div>
+  <div class="h-sub">casaescondida-anilao.com · github.com/TechNextSG/casa-escondida-anilao</div>
+  <div class="h-stats">
+    <div class="hs"><span class="hs-n">100+</span><span class="hs-l">Commits</span></div>
+    <div class="hs"><span class="hs-n">3</span><span class="hs-l">Months</span></div>
+    <div class="hs"><span class="hs-n">Apr–Jun 2026</span><span class="hs-l">Date Range</span></div>
+    <div class="hs"><span class="hs-n">TechNext SG</span><span class="hs-l">Agency</span></div>
   </div>
 </header>
 
-<div class="container">
+<div class="wrap">
 
-  <!-- SUMMARY -->
-  <div class="summary">
-    <div class="s-pill"><div class="s-dot" style="background:#3b82f6"></div>SEO — 3</div>
-    <div class="s-pill"><div class="s-dot" style="background:#8b5cf6"></div>UX / Design — 6</div>
-    <div class="s-pill"><div class="s-dot" style="background:#f97316"></div>Mobile — 5</div>
-    <div class="s-pill"><div class="s-dot" style="background:#22c55e"></div>Performance — 3</div>
-    <div class="s-pill"><div class="s-dot" style="background:#ec4899"></div>Content — 2</div>
-    <div class="s-pill"><div class="s-dot" style="background:#16a34a"></div>AI / Discovery — 1</div>
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="ctrl-row">
+      <span class="ctrl-label">Month</span>
+      <div class="pills" id="monthPills">
+        <button class="pill on" data-m="all">All Time</button>
+        <button class="pill" data-m="2026-06">June 2026</button>
+        <button class="pill" data-m="2026-05">May 2026</button>
+        <button class="pill" data-m="2026-04">April 2026</button>
+      </div>
+    </div>
+    <div class="ctrl-row">
+      <span class="ctrl-label">Type</span>
+      <div class="pills" id="typePills">
+        <button class="pill on" data-t="all">All</button>
+        <button class="pill" data-t="feat">🆕 Feature</button>
+        <button class="pill" data-t="fix">🔧 Fix</button>
+        <button class="pill" data-t="design">🎨 Design</button>
+        <button class="pill" data-t="i18n">🌐 Translation</button>
+        <button class="pill" data-t="video">🎬 Video</button>
+        <button class="pill" data-t="perf">⚡ Performance</button>
+        <button class="pill" data-t="seo">📈 SEO</button>
+        <button class="pill" data-t="mobile">📱 Mobile</button>
+        <button class="pill" data-t="content">✏️ Content</button>
+      </div>
+    </div>
+    <div class="ctrl-row">
+      <span class="ctrl-label">Search</span>
+      <div class="search-wrap">
+        <input type="text" class="search-box" id="searchBox" placeholder="Search changes, files, descriptions…"/>
+      </div>
+      <span class="count-badge" id="countBadge">— entries</span>
+    </div>
   </div>
 
-  <!-- TIMELINE -->
-  <div class="timeline">
+  <!-- ═══════════════════════ JUNE 2026 ═══════════════════════ -->
+  <div class="month-group" data-m="2026-06">
+    <div class="month-hdr"><span class="month-tag">June 2026</span><div class="month-line"></div><span class="month-cnt" id="cnt-jun"></span></div>
 
-    <!-- ── JUNE 2, 2026 ── -->
-    <div class="tl-group">
-      <div class="tl-date">June 2, 2026</div>
+    <div class="day-lbl"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>June 3, 2026</div>
 
-      <div class="tl-item tl-left cat-ai">
-        <span class="cat-tag cat-ai">🤖 AI Discovery</span>
-        <div class="tl-body">
-          <div class="tl-title">Set up llms.txt & llms-full.txt (llmstxt.org standard)</div>
-          <div class="tl-desc">Created structured reference files so AI assistants (ChatGPT, Claude, Perplexity, Gemini) can accurately surface the resort when users ask about Anilao diving, accommodation, and travel. llms.txt links all 20+ pages and blog posts. llms-full.txt contains complete room specs, dive center details, 9 dive sites, policies, reviews, and contact info.</div>
-          <div class="tl-files"><span class="tl-file">llms.txt</span><span class="tl-file">llms-full.txt</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="i18n"><span class="badge i18n">🌐 Translation</span><div class="card-body"><div class="card-title">Apply fully translated footer to all sub-pages</div><div class="card-desc">30 data-i18n footer attributes copied from rooms.html to dive, gallery, location, blog. All footer columns, links, copyright, legal links and "Powered by TechNext Asia" now translate on every page.</div><div class="card-files"><span class="ftag">dive.html</span><span class="ftag">gallery.html</span><span class="ftag">location.html</span><span class="ftag">blog.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/d3a710e" target="_blank">d3a710e</a></div>
 
-      <div class="tl-item tl-left cat-seo">
-        <span class="cat-tag cat-seo">📈 SEO</span>
-        <div class="tl-body">
-          <div class="tl-title">Fixed dive page title, H1 & meta description</div>
-          <div class="tl-desc">dive.html had 2,300 words of content but ranked at position 24 — the problem was the title tag didn't mention "scuba diving Batangas" or "Anilao dive center." Title changed to target high-value keywords. H1 and eyebrow updated to reinforce "Scuba Diving Anilao Batangas." Meta description rewritten to include: fun dives, PADI courses, night dives, nitrox, equipment rental.</div>
-          <div class="tl-files"><span class="tl-file">dive.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="i18n"><span class="badge i18n">🌐 Translation</span><div class="card-body"><div class="card-title">Fix hero glint animations — preserve &lt;em&gt; tags during translation</div><div class="card-desc">applyTranslation() now uses innerHTML when the value contains HTML tags, preserving the teal→gold gradient glint on all hero H1 titles. EN/ZH H1 keys updated to include &lt;em&gt; tags. Dive stat labels corrected (Depth Range, Certified).</div><div class="card-files"><span class="ftag">translate.js</span><span class="ftag">dive.html</span><span class="ftag">gallery.html</span><span class="ftag">location.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/f2b47da" target="_blank">f2b47da</a></div>
 
-      <div class="tl-item tl-left cat-seo">
-        <span class="cat-tag cat-seo">📈 SEO</span>
-        <div class="tl-body">
-          <div class="tl-title">Fixed gallery page title, meta & added keyword-rich intro text</div>
-          <div class="tl-desc">Gallery was at position 12 with 82 impressions but 0 clicks, and had only ~200 words of indexable text. Title updated to target "Anilao diving photos." Added a descriptive intro paragraph containing: macro diving, nudibranchs, frogfish, sea turtles, Anilao dive sites, Mabini Batangas — giving Google real content to index on the page.</div>
-          <div class="tl-files"><span class="tl-file">gallery.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="i18n"><span class="badge i18n">🌐 Translation</span><div class="card-body"><div class="card-title">500+ missing translation keys added</div><div class="card-desc">Major translation expansion: room features, dive courses/packages/equipment/FAQ, location contact form, gallery tabs, blog categories/sort/search, footer links, cookie banner, exit popup, booking modal. ~1,505 total EN/ZH pairs.</div><div class="card-files"><span class="ftag">translate.js</span><span class="ftag">rooms.html</span><span class="ftag">dive.html</span><span class="ftag">location.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/f659444" target="_blank">f659444</a></div>
 
-      <div class="tl-item tl-left cat-seo">
-        <span class="cat-tag cat-seo">📈 SEO</span>
-        <div class="tl-body">
-          <div class="tl-title">Rewrote Manila-to-Anilao blog meta description</div>
-          <div class="tl-desc">The page was at position 8.25 (edge of page 1) with 93 impressions but 0 clicks — the entire issue was one flat meta description: "Getting from Manila to Anilao, Batangas takes 2–3 hours." Replaced with a specific, compelling 155-character description mentioning bus routes, private van fares, travel time, and a CTA.</div>
-          <div class="tl-files"><span class="tl-file">blog/manila-to-anilao-transfer-guide.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="fix"><span class="badge fix">🔧 Fix</span><div class="card-body"><div class="card-title">Fix ABOUT nav translation + Book Now pill button</div><div class="card-desc">ABOUT link wasn't translating on sub-pages (used href="/#about" not "#about"). All href variants added to selector. Book Now button: border-radius 2px → 30px (pill shape, matching theme toggle).</div><div class="card-files"><span class="ftag">translate.js</span><span class="ftag">style.css</span><span class="ftag">index.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/3df7ffe" target="_blank">3df7ffe</a></div>
 
-    </div>
+    <div class="card" data-m="2026-06" data-t="i18n"><span class="badge i18n">🌐 Translation</span><div class="card-body"><div class="card-title">data-i18n on ALL text elements across all pages</div><div class="card-desc">692 total data-i18n attributes: index.html (217), rooms.html (171), location.html (141), dive.html (107). Every heading, paragraph, card, button, label, stat, eyebrow tagged. Fixed path resolution bug in site.js (blog subdirectory pages weren't loading scripts).</div><div class="card-files"><span class="ftag">index.html</span><span class="ftag">rooms.html</span><span class="ftag">dive.html</span><span class="ftag">gallery.html</span><span class="ftag">location.html</span><span class="ftag">blog.html</span><span class="ftag">site.js</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/c02300a" target="_blank">c02300a</a></div>
 
-    <!-- ── MAY 2026 ── -->
-    <div class="tl-group">
-      <div class="tl-date">May 2026</div>
+    <div class="card" data-m="2026-06" data-t="design"><span class="badge design">🎨 Design</span><div class="card-body"><div class="card-title">Chatbot: premium redesign with day/night mode support</div><div class="card-desc">Full CSS rewrite with #ce-chatbot-wrap prefix + !important overrides (350 declarations). Always-dark bot bubbles. Pill suggestion chips. CTA action cards after answers. Proper 100svh mobile sizing. Bot bubbles always dark navy — readable in both day and night.</div><div class="card-files"><span class="ftag">chatbot.js</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/05b1cb4" target="_blank">05b1cb4</a></div>
 
-      <div class="tl-item tl-left cat-content">
-        <span class="cat-tag cat-content">✏️ Content</span>
-        <div class="tl-body">
-          <div class="tl-title">Removed feature tag pills from About section and Dive overview</div>
-          <div class="tl-desc">Removed the pill/badge tags ("PADI Dive Center," "Free Breakfast," etc.) from the homepage About section and the dive center overview section as requested by the client.</div>
-          <div class="tl-files"><span class="tl-file">index.html</span><span class="tl-file">dive.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="feat"><span class="badge feat">🆕 Feature</span><div class="card-body"><div class="card-title">Chatbot: CTA action cards after answers</div><div class="card-desc">After answering about rooms/booking/diving/location/reviews, chatbot shows styled action cards linking to relevant pages. Answered questions permanently removed from rotation. 3 suggestions above input, no repeats until all shown.</div><div class="card-files"><span class="ftag">chatbot.js</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/59f18a3" target="_blank">59f18a3</a></div>
 
-      <div class="tl-item tl-left cat-mobile">
-        <span class="cat-tag cat-mobile">📱 Mobile</span>
-        <div class="tl-body">
-          <div class="tl-title">Disabled service card tap animation on touch devices</div>
-          <div class="tl-desc">On mobile, tapping a service card (Dive Center, Beach & Pool, Restaurant, etc.) briefly triggered the springy hover transform (scale + lift), creating a visible glitch. Added @media (hover: none) rules to suppress all transitions, transforms, image zoom, and the accent-line animation on tap.</div>
-          <div class="tl-files"><span class="tl-file">index.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="feat"><span class="badge feat">🆕 Feature</span><div class="card-body"><div class="card-title">EN/ZH language switcher + chatbot launched</div><div class="card-desc">translate.js: full language switcher in nav (before theme toggle). chatbot.js: resort knowledge base with fuzzy matching, 3 rotating suggestions, 9+ KB topics. site.js dynamically loads both on all pages. SEO and mobile fixes included.</div><div class="card-files"><span class="ftag">translate.js</span><span class="ftag">chatbot.js</span><span class="ftag">site.js</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/ca0b706" target="_blank">ca0b706</a></div>
 
-      <div class="tl-item tl-left cat-perf">
-        <span class="cat-tag cat-perf">⚡ Performance</span>
-        <div class="tl-body">
-          <div class="tl-title">Fixed hero section expand glitch on mobile scroll (100dvh → 100svh)</div>
-          <div class="tl-desc">When scrolling down on mobile, the browser URL bar hides, causing 100dvh to recalculate and the hero to visibly expand. Replaced all 100dvh instances with 100svh (small viewport height — locked to the height with URL bar visible, never changes on scroll). Also fixed mob-drawer height.</div>
-          <div class="tl-files"><span class="tl-file">index.html</span><span class="tl-file">dive.html</span><span class="tl-file">gallery.html</span><span class="tl-file">style.css</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="fix"><span class="badge fix">🔧 Fix</span><div class="card-body"><div class="card-title">Revert hero titles to originals + fix dive CTA buttons</div><div class="card-desc">SEO titles reverted: "Rooms & Suites", "Life at Casa Escondida", "Dive Blog & Marine Life Guides", "Casa Escondida". Dive section buttons fixed (btn-hero-primary/ghost classes). Homepage H1 reduced in size.</div><div class="card-files"><span class="ftag">index.html</span><span class="ftag">rooms.html</span><span class="ftag">gallery.html</span><span class="ftag">blog.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/412797f" target="_blank">412797f</a></div>
 
-      <div class="tl-item tl-left cat-ux">
-        <span class="cat-tag cat-ux">🎨 UX</span>
-        <div class="tl-body">
-          <div class="tl-title">Improved gallery hero readability</div>
-          <div class="tl-desc">Background image brightness reduced from 0.55 to 0.32. Overlay gradient strengthened at the top (0.30→0.45) and mid (0.55→0.62). Day mode now uses same dark overlay as night mode. Description text boosted from 78%→92% white opacity with subtle text shadow. Stat labels boosted from 50%→75% opacity.</div>
-          <div class="tl-files"><span class="tl-file">gallery.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="design"><span class="badge design">🎨 Design</span><div class="card-body"><div class="card-title">Hero text glow animation + fade-up subtitle + stat stagger + CTA buttons</div><div class="card-desc">heroTitleGlow pulsing on all H1s. heroSubIn fade-up entrance. heroEyebrowIn slide-down. Stat numbers stagger in with delay. CTA buttons on all hero sections (rooms, dive, gallery, location, blog) with shimmer + fill-wipe + ripple interactions.</div><div class="card-files"><span class="ftag">style.css</span><span class="ftag">All sub-pages</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/377a20b" target="_blank">377a20b</a></div>
 
-      <div class="tl-item tl-left cat-ux">
-        <span class="cat-tag cat-ux">🎨 UX</span>
-        <div class="tl-body">
-          <div class="tl-title">Added shimmer + fill-wipe animations & click ripple to all CTA buttons</div>
-          <div class="tl-desc">Primary buttons across all pages now have a shimmer sweep on hover (matching the homepage hero). Ghost/outline buttons have a fill-wipe on hover. Click ripple (expanding circle) added to all button types via site.js — previously only existed on homepage hero buttons. Buttons also mobile-centered with full-width stacking on small screens.</div>
-          <div class="tl-files"><span class="tl-file">site.js</span><span class="tl-file">style.css</span><span class="tl-file">rooms.html</span><span class="tl-file">dive.html</span><span class="tl-file">location.html</span><span class="tl-file">gallery.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="video"><span class="badge video">🎬 Video</span><div class="card-body"><div class="card-title">Hero background videos: Homepage, Rooms, Dive, Gallery, Location</div><div class="card-desc">All 5 hero sections replaced with looping autoplay videos. home-hero.mp4 (6MB), rooms (19MB), dive (1.5MB), gallery (12MB), location (85MB — original quality restored after compression attempt). preload="none" for performance.</div><div class="card-files"><span class="ftag">index.html</span><span class="ftag">rooms.html</span><span class="ftag">dive.html</span><span class="ftag">gallery.html</span><span class="ftag">location.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/76bfeb6" target="_blank">76bfeb6</a></div>
 
-      <div class="tl-item tl-left cat-mobile">
-        <span class="cat-tag cat-mobile">📱 Mobile</span>
-        <div class="tl-body">
-          <div class="tl-title">Hid Google Map iframe on mobile (location.html)</div>
-          <div class="tl-desc">Google Maps iframe was showing in the hero section on mobile, cluttering the layout. Added @media(max-width:768px) { .loc-hero-map { display:none; } } so only the text directions and buttons show on small screens.</div>
-          <div class="tl-files"><span class="tl-file">location.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="design"><span class="badge design">🎨 Design</span><div class="card-body"><div class="card-title">Homepage: centred hero + 4-platform reviews strip + auto-carousel services</div><div class="card-desc">Hero title/buttons centred. Rating pills moved out of hero into reviews strip (TripAdvisor, Google, Facebook, Booking.com). Services grid → auto-advancing carousel (3 visible, 3.5s auto-advance, touch swipe, pause on hover).</div><div class="card-files"><span class="ftag">index.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/cff46da" target="_blank">cff46da</a></div>
 
-      <div class="tl-item tl-left cat-mobile">
-        <span class="cat-tag cat-mobile">📱 Mobile</span>
-        <div class="tl-body">
-          <div class="tl-title">Fixed mobile hamburger nav on all pages</div>
-          <div class="tl-desc">Mobile nav dropdown was broken on all pages due to conflicting inline JS blocks (openMobileNav/closeMobileNav using style.display) fighting the visibility/opacity CSS system in site.js. Removed all inline JS from 6 pages. Replaced full-screen overlay and slide-in drawer with a clean card-style dropdown (rounded, themed for day/night). site.js now has sole control.</div>
-          <div class="tl-files"><span class="tl-file">index.html</span><span class="tl-file">rooms.html</span><span class="tl-file">dive.html</span><span class="tl-file">gallery.html</span><span class="tl-file">location.html</span><span class="tl-file">blog.html</span><span class="tl-file">style.css</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="fix"><span class="badge fix">🔧 Fix</span><div class="card-body"><div class="card-title">Transparent nav over hero + white links + logo switching</div><div class="card-desc">site.js adds .scrolled class at scrollY > 60. Base nav: dark gradient vignette + white links. Scrolled: solid background + theme colors. White logo over hero; colour logo in day+scrolled. Theme toggle also white over hero.</div><div class="card-files"><span class="ftag">style.css</span><span class="ftag">site.js</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/df989a3" target="_blank">df989a3</a></div>
 
-      <div class="tl-item tl-left cat-ux">
-        <span class="cat-tag cat-ux">🎨 UX</span>
-        <div class="tl-body">
-          <div class="tl-title">Font color audit — day & night mode readability</div>
-          <div class="tl-desc">Audited all text color tokens in both themes. Day mode text-secondary and text-muted darkened for better contrast on light backgrounds. Night mode text boosted. Service cards, booking form, and section text opacity values updated across the homepage.</div>
-          <div class="tl-files"><span class="tl-file">index.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="design"><span class="badge design">🎨 Design</span><div class="card-body"><div class="card-title">Redesign hero sections: dive, gallery, location, blog match rooms.html</div><div class="card-desc">All 4 hero sections converted to compact padding-based layout (9rem 4rem 3.5rem). Eyebrow + H1 with glint + subtitle + stats row. Google Map moved from hero to its own section on location.html. Blog hero upgraded from inline-style minimal to full hero.</div><div class="card-files"><span class="ftag">dive.html</span><span class="ftag">gallery.html</span><span class="ftag">location.html</span><span class="ftag">blog.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/68c3e46" target="_blank">68c3e46</a></div>
 
-      <div class="tl-item tl-left cat-ux">
-        <span class="cat-tag cat-ux">🎨 UX</span>
-        <div class="tl-body">
-          <div class="tl-title">Removed bottom glow from hero in day mode</div>
-          <div class="tl-desc">The hero overlay in day mode faded to a light beige (rgba(245,240,234,0.97)) at the bottom, creating an unpleasant glow effect. Changed to a consistent dark overlay (rgba(4,8,15,0.82)) matching night mode so text remains readable in both themes.</div>
-          <div class="tl-files"><span class="tl-file">index.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="fix"><span class="badge fix">🔧 Fix</span><div class="card-body"><div class="card-title">Marquee strip: 14 items, compact gap, added to all sub-pages</div><div class="card-desc">6 new marquee items added. Gap 3rem→1.5rem, padding tighter. Marquee CSS added to style.css. HTML injected into all 5 sub-pages. MarqueeScroll keyframe renamed to avoid conflicts.</div><div class="card-files"><span class="ftag">style.css</span><span class="ftag">All pages</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/db52d5a" target="_blank">db52d5a</a></div>
 
-      <div class="tl-item tl-left cat-perf">
-        <span class="cat-tag cat-perf">⚡ Performance</span>
-        <div class="tl-body">
-          <div class="tl-title">Fixed hero image drift / edge gaps during animation</div>
-          <div class="tl-desc">The hero background image was "drifting" during the floating animation, revealing white gaps at the edges. Fixed by adding inset:-50px to .hero-photo, creating a 50px buffer on all sides clipped by the overflow:hidden on #hero. Prevents any edge from becoming visible during translate animations.</div>
-          <div class="tl-files"><span class="tl-file">index.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="day-lbl" style="margin-top:1.2rem"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>June 1–2, 2026</div>
 
-      <div class="tl-item tl-left cat-ux">
-        <span class="cat-tag cat-ux">🎨 UX</span>
-        <div class="tl-body">
-          <div class="tl-title">Hero image repositioning & zoom adjustment</div>
-          <div class="tl-desc">Repositioned and rescaled the hero background image to better centre on the diver subject. Adjusted background-position and background-size for optimal framing on both desktop and mobile viewports.</div>
-          <div class="tl-files"><span class="tl-file">index.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="feat"><span class="badge feat">🆕 Feature</span><div class="card-body"><div class="card-title">llms.txt + llms-full.txt — AI discovery standard</div><div class="card-desc">Created per llmstxt.org standard. AI assistants (ChatGPT, Claude, Perplexity, Gemini) can now accurately surface the resort. llms.txt links all 26 pages. llms-full.txt contains complete room specs, dive center, 9 dive sites, policies, reviews. Submitted to llmstxt.site directory.</div><div class="card-files"><span class="ftag">llms.txt</span><span class="ftag">llms-full.txt</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/356e849" target="_blank">356e849</a></div>
 
-      <div class="tl-item tl-left cat-content">
-        <span class="cat-tag cat-content">✏️ Content</span>
-        <div class="tl-body">
-          <div class="tl-title">May 2026 Analytics Report created</div>
-          <div class="tl-desc">Created a full HTML analytics report covering Google Search Console data for May 2026 — KPI cards, weekly growth charts, top queries, pages, countries, device breakdown, and Facebook Ads recommendation. Saved to the Analytics folder in Google Drive.</div>
-          <div class="tl-files"><span class="tl-file">Analytics/May-2026-Analytics-Report.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+    <div class="card" data-m="2026-06" data-t="seo"><span class="badge seo">📈 SEO</span><div class="card-body"><div class="card-title">Title tags, meta descriptions, H1 improvements</div><div class="card-desc">dive.html title targets "scuba diving Anilao Batangas". gallery.html title targets "Anilao diving photos". Manila-to-Anilao blog meta rewritten to 155 chars with keywords + CTA. Gallery SEO intro paragraph added. og:site_name added to index.html.</div><div class="card-files"><span class="ftag">dive.html</span><span class="ftag">gallery.html</span><span class="ftag">blog/manila-to-anilao-transfer-guide.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/76a8e08" target="_blank">76a8e08</a></div>
 
-      <div class="tl-item tl-left cat-perf">
-        <span class="cat-tag cat-perf">⚡ Performance</span>
-        <div class="tl-body">
-          <div class="tl-title">Mobile nav always-transparent header enforced</div>
-          <div class="tl-desc">Ensured the navigation header remains 100% transparent at all times — no frosted glass or solid background on scroll, as per project requirement. Applied consistently across all pages via style.css and page-specific overrides.</div>
-          <div class="tl-files"><span class="tl-file">style.css</span><span class="tl-file">index.html</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+  </div>
 
-      <div class="tl-item tl-left cat-mobile">
-        <span class="cat-tag cat-mobile">📱 Mobile</span>
-        <div class="tl-body">
-          <div class="tl-title">Mobile button centering & full-width stacking</div>
-          <div class="tl-desc">Audited all CTA button groups across all pages. Added mobile media queries so button pairs (e.g. Get Directions / Contact Us on location.html, Book / Inquire on rooms.html) stack vertically and stretch full-width on screens ≤768px instead of being left-aligned or side-by-side on narrow screens.</div>
-          <div class="tl-files"><span class="tl-file">location.html</span><span class="tl-file">rooms.html</span><span class="tl-file">dive.html</span><span class="tl-file">style.css</span></div>
-        </div>
-        <span class="status-done">✓ Done</span>
-      </div>
+  <!-- ═══════════════════════ MAY 2026 ═══════════════════════ -->
+  <div class="month-group" data-m="2026-05">
+    <div class="month-hdr"><span class="month-tag">May 2026</span><div class="month-line"></div><span class="month-cnt" id="cnt-may"></span></div>
 
-    </div>
+    <div class="day-lbl"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>May 24, 2026</div>
+
+    <div class="card" data-m="2026-05" data-t="fix"><span class="badge fix">🔧 Fix</span><div class="card-body"><div class="card-title">Fix hero scroll glitch (100dvh → 100svh)</div><div class="card-desc">100dvh recalculates when mobile URL bar hides/shows, causing visible hero expansion on scroll. 100svh (small viewport height) is locked to height with URL bar visible — never changes. Applied to index.html, dive.html, gallery.html, mob-drawer in style.css.</div><div class="card-files"><span class="ftag">index.html</span><span class="ftag">dive.html</span><span class="ftag">gallery.html</span><span class="ftag">style.css</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/fa43b87" target="_blank">fa43b87</a></div>
+
+    <div class="card" data-m="2026-05" data-t="feat"><span class="badge feat">🆕 Feature</span><div class="card-body"><div class="card-title">Click ripple unified across all CTA buttons</div><div class="card-desc">Ripple handler moved from index.html inline JS to site.js — applies to all button types across all pages. @keyframes btnRipple + .btn-ripple CSS in style.css.</div><div class="card-files"><span class="ftag">site.js</span><span class="ftag">style.css</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/93567eb" target="_blank">93567eb</a></div>
+
+    <div class="card" data-m="2026-05" data-t="design"><span class="badge design">🎨 Design</span><div class="card-body"><div class="card-title">Shimmer + fill-wipe hover animations on all CTA buttons</div><div class="card-desc">Primary buttons: shimmer sweep on hover. Ghost buttons: fill-wipe on hover. Applied across all pages. Mobile button centering with full-width stacking. Google Map hidden on mobile location page.</div><div class="card-files"><span class="ftag">style.css</span><span class="ftag">rooms.html</span><span class="ftag">dive.html</span><span class="ftag">location.html</span><span class="ftag">gallery.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/d8650a8" target="_blank">d8650a8</a></div>
+
+    <div class="card" data-m="2026-05" data-t="design"><span class="badge design">🎨 Design</span><div class="card-body"><div class="card-title">Gallery hero readability: darker overlay + stronger text shadows</div><div class="card-desc">Background brightness 0.55→0.32. Overlay gradient strengthened. Day mode now uses same dark overlay as night. Description text 78%→92% opacity + text shadow. Stat labels 50%→75% opacity.</div><div class="card-files"><span class="ftag">gallery.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/fa3f1be" target="_blank">fa3f1be</a></div>
+
+    <div class="card" data-m="2026-05" data-t="fix"><span class="badge fix">🔧 Fix</span><div class="card-body"><div class="card-title">Fix mobile hamburger nav on all pages</div><div class="card-desc">Mobile nav was broken across all pages — conflicting inline JS blocks used style.display overrides fighting CSS visibility system. Removed all inline JS from 6 pages. New card-style dropdown (rounded, themed for day/night). site.js has sole control.</div><div class="card-files"><span class="ftag">index.html</span><span class="ftag">rooms.html</span><span class="ftag">dive.html</span><span class="ftag">gallery.html</span><span class="ftag">location.html</span><span class="ftag">blog.html</span><span class="ftag">style.css</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/d0015d0" target="_blank">d0015d0</a></div>
+
+    <div class="card" data-m="2026-05" data-t="design"><span class="badge design">🎨 Design</span><div class="card-body"><div class="card-title">Hero overlay day/night mode fix + text readability boost</div><div class="card-desc">Day mode hero overlay: removed beige/light glow, replaced with consistent dark overlay. Text tokens boosted for both modes. Service card, booking form text visibility improved.</div><div class="card-files"><span class="ftag">index.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/29afa7f" target="_blank">29afa7f</a></div>
+
+    <div class="card" data-m="2026-05" data-t="fix"><span class="badge fix">🔧 Fix</span><div class="card-body"><div class="card-title">Hero image: repositioning, zoom adjustment, animation gap fix</div><div class="card-desc">Hero photo repositioned to centre on diver. Zoom adjusted (170%→145%). inset:-50px buffer added to prevent animation gap at edges. dayFloat and diverSwim animations fine-tuned.</div><div class="card-files"><span class="ftag">index.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/0d8d9f4" target="_blank">0d8d9f4</a></div>
+
+    <div class="card" data-m="2026-05" data-t="content"><span class="badge content">✏️ Content</span><div class="card-body"><div class="card-title">Sync room cards with Booking.com data + gallery mosaic update</div><div class="card-desc">Room descriptions and features aligned with Booking.com listings. Homepage gallery mosaic updated with 13 new images. Room card images updated to match Google Drive folder.</div><div class="card-files"><span class="ftag">index.html</span><span class="ftag">rooms.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/cc88fba" target="_blank">cc88fba</a></div>
+
+    <div class="day-lbl" style="margin-top:1.2rem"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>May 23, 2026</div>
+
+    <div class="card" data-m="2026-05" data-t="fix"><span class="badge fix">🔧 Fix</span><div class="card-body"><div class="card-title">Day/night toggle fix + mobile nav redesigned as dropdown</div><div class="card-desc">Duplicate event handlers removed. Mobile nav rebuilt as clean dropdown (card-style, rounded, glass effect). Auto-calendar picker added to check-in date field.</div><div class="card-files"><span class="ftag">index.html</span><span class="ftag">site.js</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/ffa440e" target="_blank">ffa440e</a></div>
+
+    <div class="card" data-m="2026-05" data-t="video"><span class="badge video">🎬 Video</span><div class="card-body"><div class="card-title">Cinematic video backgrounds added to dive and gallery heroes</div><div class="card-desc">Dive hero and gallery hero updated with cinematic video backgrounds (autoplay, muted, loop). Poster fallback shown while video buffers.</div><div class="card-files"><span class="ftag">dive.html</span><span class="ftag">gallery.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/19ea6dc" target="_blank">19ea6dc</a></div>
+
+  </div>
+
+  <!-- ═══════════════════════ APRIL 2026 ═══════════════════════ -->
+  <div class="month-group" data-m="2026-04">
+    <div class="month-hdr"><span class="month-tag">April 2026</span><div class="month-line"></div><span class="month-cnt" id="cnt-apr"></span></div>
+
+    <div class="day-lbl"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>April 27, 2026</div>
+
+    <div class="card" data-m="2026-04" data-t="perf"><span class="badge perf">⚡ Performance</span><div class="card-body"><div class="card-title">Lazy loading, image attributes, performance optimisation</div><div class="card-desc">loading="lazy" on all images, loading="eager" on logos. decoding="async" on all img tags. width/height set to prevent layout shift. Async fonts, shared CSS, lazy FB SDK, DNS prefetch across all pages.</div><div class="card-files"><span class="ftag">All pages</span><span class="ftag">style.css</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/648b5ae" target="_blank">648b5ae</a></div>
+
+    <div class="card" data-m="2026-04" data-t="fix"><span class="badge fix">🔧 Fix</span><div class="card-body"><div class="card-title">Canonical/OG/schema URLs updated to live domain</div><div class="card-desc">All canonical links, OG URLs, and JSON-LD schema references updated to casaescondida-anilao.com (GitHub Pages custom domain).</div><div class="card-files"><span class="ftag">All pages</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/5bda140" target="_blank">5bda140</a></div>
+
+    <div class="card" data-m="2026-04" data-t="fix"><span class="badge fix">🔧 Fix</span><div class="card-body"><div class="card-title">Mobile hero enhancements: new diver image, wave animation, bubbles & rays</div><div class="card-desc">Homepage hero updated with underwater diver scene. dayFloat wave animation added. Decorative bubble and ray elements added for depth effect.</div><div class="card-files"><span class="ftag">index.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/3edb1f1" target="_blank">3edb1f1</a></div>
+
+    <div class="day-lbl" style="margin-top:1.2rem"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>April 23, 2026</div>
+
+    <div class="card" data-m="2026-04" data-t="mobile"><span class="badge mobile">📱 Mobile</span><div class="card-body"><div class="card-title">Mobile v2: slide-in drawer nav, dvh, overflow-x, touch-action, safe area</div><div class="card-desc">Mobile navigation redesigned as slide-in drawer. 100dvh hero heights. overflow-x hidden on body. touch-action: manipulation on all interactive elements. Safe area inset padding for notched phones. All cursor effects removed on touch devices.</div><div class="card-files"><span class="ftag">style.css</span><span class="ftag">index.html</span><span class="ftag">site.js</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/2b0fc02" target="_blank">2b0fc02</a></div>
+
+    <div class="card" data-m="2026-04" data-t="content"><span class="badge content">✏️ Content</span><div class="card-body"><div class="card-title">Remove all pricing and rate references</div><div class="card-desc">All specific pricing, rates, and cost references removed from all pages and blog posts as per client instruction.</div><div class="card-files"><span class="ftag">index.html</span><span class="ftag">rooms.html</span><span class="ftag">dive.html</span><span class="ftag">blog/*.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/7132991" target="_blank">7132991</a></div>
+
+    <div class="card" data-m="2026-04" data-t="mobile"><span class="badge mobile">📱 Mobile</span><div class="card-body"><div class="card-title">Gallery tab bar: 4-column mobile layout + service card fixes</div><div class="card-desc">Gallery tabs display in 2×2 grid on mobile. Service card text overlap on tap fixed. svc-list hover expansion scoped to desktop only. Cursor effects fully disabled at 1100px breakpoint.</div><div class="card-files"><span class="ftag">gallery.html</span><span class="ftag">index.html</span><span class="ftag">style.css</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/2af4cfe" target="_blank">2af4cfe</a></div>
+
+    <div class="card" data-m="2026-04" data-t="feat"><span class="badge feat">🆕 Feature</span><div class="card-body"><div class="card-title">TechNext Asia footer credit added</div><div class="card-desc">Powered by TechNext Asia added inline in footer across all pages, with gradient highlight styling.</div><div class="card-files"><span class="ftag">All pages</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/17d3062" target="_blank">17d3062</a></div>
+
+    <div class="card" data-m="2026-04" data-t="perf"><span class="badge perf">⚡ Performance</span><div class="card-body"><div class="card-title">Gallery: major performance optimisation for underwater section</div><div class="card-desc">Lazy loading, virtual scrolling, and animation kill on mobile for the 111-photo underwater gallery section. Significantly reduced initial paint time.</div><div class="card-files"><span class="ftag">gallery.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/ea2c1e1" target="_blank">ea2c1e1</a></div>
+
+    <div class="day-lbl" style="margin-top:1.2rem"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>April 22, 2026</div>
+
+    <div class="card" data-m="2026-04" data-t="feat"><span class="badge feat">🆕 Feature</span><div class="card-body"><div class="card-title">Underwater World gallery: 22 species, 111 photos, auto-rotating carousels</div><div class="card-desc">Major gallery expansion. 22 marine creature species with dedicated photo carousels. Auto-rotating on hover. Ecosystem library on dive.html. Image files renamed to descriptive filenames.</div><div class="card-files"><span class="ftag">gallery.html</span><span class="ftag">dive.html</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/b76631d" target="_blank">b76631d</a></div>
+
+    <div class="card" data-m="2026-04" data-t="feat"><span class="badge feat">🆕 Feature</span><div class="card-body"><div class="card-title">🚀 Initial Deploy — Casa Escondida Anilao website</div><div class="card-desc">First production deployment to GitHub Pages at casaescondida-anilao.com. All core pages: index, rooms, dive, gallery, location, blog. Full schema markup (Hotel, LocalBusiness, FAQPage, BlogPosting), OG tags, sitemap.xml, robots.txt, manifest.json.</div><div class="card-files"><span class="ftag">index.html</span><span class="ftag">rooms.html</span><span class="ftag">dive.html</span><span class="ftag">gallery.html</span><span class="ftag">location.html</span><span class="ftag">blog.html</span><span class="ftag">site.js</span><span class="ftag">style.css</span></div></div><a class="hash" href="https://github.com/TechNextSG/casa-escondida-anilao/commit/be51609" target="_blank">be51609</a></div>
+
   </div>
 
 </div>
 
-<footer style="background:var(--navy);color:rgba(255,255,255,.4);text-align:center;padding:1.2rem;font-size:.72rem;">
-  Maintained by <strong style="color:var(--teal)">TechNext SG</strong> · hello@technext.asia · Last updated June 2, 2026
-</footer>
+<footer>Maintained by <strong>TechNext SG</strong> · hello@technext.asia · Last updated June 3, 2026 · <a href="https://github.com/TechNextSG/casa-escondida-anilao" target="_blank" style="color:rgba(77,200,232,.5);text-decoration:none">GitHub Repository ↗</a></footer>
 
+<script>
+(function(){
+  var activeM='all', activeT='all', q='';
+
+  function run(){
+    var cards=document.querySelectorAll('.card');
+    var vis=0;
+    cards.forEach(function(c){
+      var m=c.getAttribute('data-m')||'';
+      var t=c.getAttribute('data-t')||'';
+      var txt=c.textContent.toLowerCase();
+      var ok=(activeM==='all'||m===activeM)&&(activeT==='all'||t===activeT)&&(!q||txt.includes(q));
+      c.classList.toggle('hidden',!ok);
+      if(ok)vis++;
+    });
+    document.getElementById('countBadge').textContent=vis+' entr'+(vis===1?'y':'ies');
+
+    // Month counts
+    [['jun','2026-06'],['may','2026-05'],['apr','2026-04']].forEach(function(p){
+      var el=document.getElementById('cnt-'+p[0]);
+      if(!el)return;
+      var total=document.querySelectorAll('.card[data-m="'+p[1]+'"]').length;
+      var shown=document.querySelectorAll('.card[data-m="'+p[1]+'"]:not(.hidden)').length;
+      el.textContent=shown+' change'+(shown!==1?'s':'');
+    });
+
+    // Hide/show month groups
+    document.querySelectorAll('.month-group').forEach(function(g){
+      var m=g.getAttribute('data-m');
+      var hasVis=g.querySelectorAll('.card:not(.hidden)').length>0;
+      g.style.display=(activeM!=='all'&&m!==activeM)||!hasVis?'none':'';
+    });
+  }
+
+  document.getElementById('monthPills').addEventListener('click',function(e){
+    var b=e.target.closest('.pill');if(!b)return;
+    document.querySelectorAll('#monthPills .pill').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');activeM=b.getAttribute('data-m');run();
+  });
+
+  document.getElementById('typePills').addEventListener('click',function(e){
+    var b=e.target.closest('.pill');if(!b)return;
+    document.querySelectorAll('#typePills .pill').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');activeT=b.getAttribute('data-t');run();
+  });
+
+  document.getElementById('searchBox').addEventListener('input',function(){q=this.value.toLowerCase();run();});
+
+  run();
+})();
+</script>
 </body>
 </html>
