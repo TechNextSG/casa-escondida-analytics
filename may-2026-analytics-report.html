@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>May 2026 Analytics Report — Casa Escondida Anilao</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --navy:   #0d1e2e;
+      --navy2:  #1a3050;
+      --teal:   #4dc8e8;
+      --teal-d: #2fa8c8;
+      --gold:   #e8c56a;
+      --white:  #ffffff;
+      --bg:     #f4f7fa;
+      --card:   #ffffff;
+      --text:   #1a2b3c;
+      --text2:  #4a6070;
+      --border: #dde5ee;
+      --green:  #22c55e;
+      --red:    #ef4444;
+      --orange: #f97316;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
+
+    /* ── HEADER ── */
+    .report-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, #0e2840 100%);
+      color: white; padding: 3rem 3rem 2.5rem; position: relative; overflow: hidden;
+    }
+    .report-header::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(77,200,232,.18) 0%, transparent 70%);
+    }
+    .header-logo { font-size: 0.65rem; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-bottom: .6rem; }
+    .header-title { font-size: 2rem; font-weight: 700; margin-bottom: .4rem; }
+    .header-title span { color: var(--teal); }
+    .header-sub { color: rgba(255,255,255,.6); font-size: .9rem; margin-bottom: 2rem; }
+    .header-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .meta-item { display: flex; flex-direction: column; gap: .15rem; }
+    .meta-label { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+    .meta-value { font-size: .88rem; color: rgba(255,255,255,.9); font-weight: 500; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .section { margin-bottom: 2.5rem; }
+    .section-title {
+      font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--teal-d); font-weight: 700; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section-heading { font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 1.5rem; }
+
+    /* ── KPI CARDS ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .kpi-card {
+      background: var(--card); border-radius: 10px; padding: 1.4rem 1.6rem;
+      border: 1px solid var(--border); position: relative; overflow: hidden;
+    }
+    .kpi-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--teal);
+    }
+    .kpi-card.gold::before { background: var(--gold); }
+    .kpi-card.green::before { background: var(--green); }
+    .kpi-card.orange::before { background: var(--orange); }
+    .kpi-label { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text2); margin-bottom: .5rem; }
+    .kpi-value { font-size: 2rem; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: .35rem; }
+    .kpi-sub { font-size: .75rem; color: var(--text2); }
+    .kpi-badge {
+      display: inline-flex; align-items: center; gap: .25rem;
+      font-size: .68rem; font-weight: 600; padding: .18rem .55rem;
+      border-radius: 20px; margin-top: .4rem;
+    }
+    .badge-up { background: #dcfce7; color: #15803d; }
+    .badge-down { background: #fee2e2; color: #b91c1c; }
+    .badge-neutral { background: #e0f2fe; color: #0369a1; }
+
+    /* ── CHARTS ROW ── */
+    .charts-row { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+    .chart-card {
+      background: var(--card); border-radius: 10px; padding: 1.6rem;
+      border: 1px solid var(--border);
+    }
+    .chart-title { font-size: .8rem; font-weight: 700; color: var(--navy); margin-bottom: 1.2rem; }
+    .chart-wrap { position: relative; height: 220px; }
+
+    /* ── TABLES ── */
+    .data-card { background: var(--card); border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
+    .data-card-head {
+      padding: 1rem 1.4rem; border-bottom: 1px solid var(--border);
+      font-size: .75rem; font-weight: 700; color: var(--navy);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    thead th {
+      background: #f8fafc; padding: .7rem 1.4rem; text-align: left;
+      font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text2); border-bottom: 1px solid var(--border); font-weight: 600;
+    }
+    tbody tr:hover { background: #f8fafc; }
+    tbody td { padding: .72rem 1.4rem; border-bottom: 1px solid #f0f4f8; color: var(--text); }
+    tbody tr:last-child td { border-bottom: none; }
+    .td-right { text-align: right; }
+    .td-center { text-align: center; }
+    .pos-pill {
+      display: inline-block; padding: .15rem .55rem; border-radius: 20px;
+      font-size: .7rem; font-weight: 600;
+    }
+    .pos-good { background: #dcfce7; color: #15803d; }
+    .pos-mid  { background: #fef9c3; color: #854d0e; }
+    .pos-low  { background: #fee2e2; color: #b91c1c; }
+    .bar-wrap { display: flex; align-items: center; gap: .6rem; }
+    .bar-bg { flex: 1; height: 6px; background: #e5eaf0; border-radius: 3px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 3px; background: var(--teal); }
+    .bar-fill.gold { background: var(--gold); }
+
+    /* ── TWO COL ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+    /* ── DEVICE VISUAL ── */
+    .device-row { display: flex; flex-direction: column; gap: .8rem; padding: 1.2rem 1.4rem; }
+    .device-item { }
+    .device-header { display: flex; justify-content: space-between; margin-bottom: .3rem; font-size: .8rem; }
+    .device-name { font-weight: 600; color: var(--navy); }
+    .device-stats { color: var(--text2); font-size: .75rem; }
+    .device-bar-bg { height: 8px; background: #e5eaf0; border-radius: 4px; overflow: hidden; }
+    .device-bar { height: 100%; border-radius: 4px; }
+    .d-desktop { background: var(--teal); }
+    .d-mobile  { background: var(--gold); }
+    .d-tablet  { background: #a78bfa; }
+
+    /* ── WEEKLY SUMMARY ── */
+    .weekly-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .week-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.2rem 1.4rem; position: relative; overflow: hidden;
+    }
+    .week-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    }
+    .w1::after { background: #93c5fd; }
+    .w2::after { background: #6ee7b7; }
+    .w3::after { background: var(--gold); }
+    .w4::after { background: var(--teal); }
+    .week-label { font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text2); margin-bottom: .5rem; }
+    .week-clicks { font-size: 1.5rem; font-weight: 700; color: var(--navy); }
+    .week-imp { font-size: .75rem; color: var(--text2); margin-top: .2rem; }
+    .week-ctr { font-size: .75rem; color: var(--teal-d); font-weight: 600; margin-top: .3rem; }
+
+    /* ── FB ADS SECTION ── */
+    .fb-section {
+      background: linear-gradient(135deg, #0d1e2e 0%, #1a3050 100%);
+      border-radius: 14px; padding: 2.5rem; color: white; margin-bottom: 2.5rem;
+    }
+    .fb-eyebrow { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-bottom: .6rem; }
+    .fb-title { font-size: 1.5rem; font-weight: 700; margin-bottom: .6rem; }
+    .fb-title span { color: var(--teal); }
+    .fb-subtitle { color: rgba(255,255,255,.65); font-size: .9rem; margin-bottom: 2rem; max-width: 620px; line-height: 1.7; }
+    .fb-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .fb-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px; padding: 1.4rem;
+    }
+    .fb-card-icon { font-size: 1.4rem; margin-bottom: .6rem; }
+    .fb-card-title { font-size: .82rem; font-weight: 700; color: var(--teal); margin-bottom: .4rem; }
+    .fb-card-text { font-size: .78rem; color: rgba(255,255,255,.65); line-height: 1.65; }
+    .fb-why { margin-bottom: 2rem; }
+    .fb-why-title { font-size: .75rem; font-weight: 700; color: var(--gold); margin-bottom: 1rem; letter-spacing: .06em; text-transform: uppercase; }
+    .fb-reasons { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+    .fb-reason {
+      display: flex; align-items: flex-start; gap: .7rem;
+      background: rgba(255,255,255,.04); border-radius: 8px; padding: 1rem;
+    }
+    .fb-reason-dot {
+      width: 22px; height: 22px; border-radius: 50%; background: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700; flex-shrink: 0; margin-top: .1rem;
+    }
+    .fb-reason-text { font-size: .78rem; color: rgba(255,255,255,.75); line-height: 1.6; }
+    .fb-reason-text strong { color: white; }
+    .fb-audience { margin-bottom: 1.5rem; }
+    .fb-audience-title { font-size: .75rem; font-weight: 700; color: var(--gold); margin-bottom: 1rem; letter-spacing: .06em; text-transform: uppercase; }
+    .fb-audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; }
+    .fb-aud-card {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 8px; padding: 1rem; text-align: center;
+    }
+    .fb-aud-flag { font-size: 1.4rem; margin-bottom: .3rem; }
+    .fb-aud-country { font-size: .75rem; font-weight: 700; color: white; margin-bottom: .2rem; }
+    .fb-aud-note { font-size: .68rem; color: rgba(255,255,255,.55); line-height: 1.5; }
+    .fb-budget {
+      background: rgba(77,200,232,.1); border: 1px solid rgba(77,200,232,.2);
+      border-radius: 10px; padding: 1.4rem 1.6rem;
+    }
+    .fb-budget-title { font-size: .75rem; font-weight: 700; color: var(--teal); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: .06em; }
+    .fb-budget-items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .fb-budget-item { }
+    .fb-budget-label { font-size: .65rem; color: rgba(255,255,255,.5); margin-bottom: .2rem; }
+    .fb-budget-value { font-size: .9rem; font-weight: 700; color: white; }
+
+    /* ── ACTION STEPS ── */
+    .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .action-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.2rem 1.4rem; display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .action-num {
+      width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: .75rem; font-weight: 700; flex-shrink: 0;
+    }
+    .a-high { background: #fee2e2; color: #b91c1c; }
+    .a-mid  { background: #fef9c3; color: #854d0e; }
+    .a-low  { background: #dcfce7; color: #15803d; }
+    .action-content { }
+    .action-title { font-size: .82rem; font-weight: 700; color: var(--navy); margin-bottom: .25rem; }
+    .action-text { font-size: .76rem; color: var(--text2); line-height: 1.6; }
+
+    /* ── FOOTER ── */
+    .report-footer {
+      background: var(--navy); color: rgba(255,255,255,.45); text-align: center;
+      padding: 1.4rem; font-size: .72rem; letter-spacing: .05em;
+    }
+    .report-footer strong { color: var(--teal); }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; }
+      .report-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .fb-section { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="report-header">
+  <div class="header-logo">TechNext SG · Digital Marketing Report</div>
+  <div class="header-title">May 2026 <span>Analytics Report</span></div>
+  <div class="header-sub">Google Search Console Performance · casaescondida-anilao.com</div>
+  <div class="header-meta">
+    <div class="meta-item"><span class="meta-label">Client</span><span class="meta-value">Casa Escondida Anilao Resort & Dive Center</span></div>
+    <div class="meta-item"><span class="meta-label">Report Period</span><span class="meta-value">May 1 – May 30, 2026</span></div>
+    <div class="meta-item"><span class="meta-label">Report Date</span><span class="meta-value">June 1, 2026</span></div>
+    <div class="meta-item"><span class="meta-label">Prepared By</span><span class="meta-value">TechNext SG</span></div>
+  </div>
+</div>
+
+<!-- ══ NAV ══ -->
+<div style="background:#1a3050;padding:.6rem 3rem;display:flex;gap:1.5rem;align-items:center;">
+  <span style="font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);">Reports</span>
+  <a style="font-size:.75rem;font-weight:600;padding:.3rem .8rem;border-radius:20px;text-decoration:none;background:#4dc8e8;color:#0d1e2e;" href="may-2026-analytics-report.html">May 2026 ← Current</a>
+  <a style="font-size:.75rem;font-weight:600;padding:.3rem .8rem;border-radius:20px;text-decoration:none;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);" href="June-2026-Analytics-Report.html">June 2026</a>
+</div>
+
+<!-- ══ MAIN ══ -->
+<div class="container">
+
+  <!-- KPI CARDS -->
+  <div class="section">
+    <div class="section-title">May Performance Overview</div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Total Clicks</div>
+        <div class="kpi-value">85</div>
+        <div class="kpi-sub">People visited from Google</div>
+        <div class="kpi-badge badge-up">↑ Growing week-on-week</div>
+      </div>
+      <div class="kpi-card gold">
+        <div class="kpi-label">Total Impressions</div>
+        <div class="kpi-value">1,105</div>
+        <div class="kpi-sub">Times shown in search results</div>
+        <div class="kpi-badge badge-up">↑ Peaked at 87 on May 30</div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-label">Click-Through Rate</div>
+        <div class="kpi-value">7.7%</div>
+        <div class="kpi-sub">Industry average: 3–5%</div>
+        <div class="kpi-badge badge-up">↑ Above average ✓</div>
+      </div>
+      <div class="kpi-card orange">
+        <div class="kpi-label">Avg. Google Position</div>
+        <div class="kpi-value">~9.0</div>
+        <div class="kpi-sub">Bottom of page 1 / top of page 2</div>
+        <div class="kpi-badge badge-neutral">→ Close to top 5</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEKLY BREAKDOWN -->
+  <div class="section">
+    <div class="section-title">Week-by-Week Growth</div>
+    <div class="weekly-grid">
+      <div class="week-card w1">
+        <div class="week-label">Week 1 · May 1–7</div>
+        <div class="week-clicks">15 <span style="font-size:.9rem;font-weight:400;color:var(--text2)">clicks</span></div>
+        <div class="week-imp">159 impressions</div>
+        <div class="week-ctr">CTR 9.4%</div>
+      </div>
+      <div class="week-card w2">
+        <div class="week-label">Week 2 · May 8–14</div>
+        <div class="week-clicks">16 <span style="font-size:.9rem;font-weight:400;color:var(--text2)">clicks</span></div>
+        <div class="week-imp">225 impressions</div>
+        <div class="week-ctr">CTR 7.1%</div>
+      </div>
+      <div class="week-card w3">
+        <div class="week-label">Week 3 · May 15–21</div>
+        <div class="week-clicks">20 <span style="font-size:.9rem;font-weight:400;color:var(--text2)">clicks</span></div>
+        <div class="week-imp">257 impressions</div>
+        <div class="week-ctr">CTR 7.8%</div>
+      </div>
+      <div class="week-card w4">
+        <div class="week-label">Week 4 · May 22–30</div>
+        <div class="week-clicks">34 <span style="font-size:.9rem;font-weight:400;color:var(--text2)">clicks</span></div>
+        <div class="week-imp">464 impressions</div>
+        <div class="week-ctr">CTR 7.3%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="section">
+    <div class="section-title">Daily Performance Trend</div>
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">Daily Clicks & Impressions — May 2026</div>
+        <div class="chart-wrap"><canvas id="dailyChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Weekly Click Growth</div>
+        <div class="chart-wrap"><canvas id="weeklyChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUERIES + PAGES -->
+  <div class="section">
+    <div class="section-title">Search Queries & Pages</div>
+    <div class="two-col">
+      <div class="data-card">
+        <div class="data-card-head">
+          <span>🔍 Top Search Queries</span>
+          <span style="font-size:.7rem;color:var(--text2);font-weight:400">May 2026</span>
+        </div>
+        <table>
+          <thead><tr><th>Query</th><th class="td-right">Clicks</th><th class="td-right">CTR</th><th class="td-center">Position</th></tr></thead>
+          <tbody>
+            <tr><td>casa escondida anilao</td><td class="td-right"><strong>23</strong></td><td class="td-right">13.1%</td><td class="td-center"><span class="pos-pill pos-good">6.8</span></td></tr>
+            <tr><td>casa escondida</td><td class="td-right"><strong>20</strong></td><td class="td-right">9.1%</td><td class="td-center"><span class="pos-pill pos-good">6.4</span></td></tr>
+            <tr><td>casa escondida anilao resort & dive center</td><td class="td-right"><strong>8</strong></td><td class="td-right">10.3%</td><td class="td-center"><span class="pos-pill pos-good">6.6</span></td></tr>
+            <tr><td>casa escondida anilao resort</td><td class="td-right"><strong>5</strong></td><td class="td-right">23.8%</td><td class="td-center"><span class="pos-pill pos-mid">8.7</span></td></tr>
+            <tr><td>diving in anilao</td><td class="td-right"><strong>1</strong></td><td class="td-right">100%</td><td class="td-center"><span class="pos-pill pos-good">1.0</span></td></tr>
+            <tr><td>casa escondida anilao photos</td><td class="td-right">0</td><td class="td-right">0%</td><td class="td-center"><span class="pos-pill pos-mid">8.6</span></td></tr>
+            <tr><td>scuba diving batangas</td><td class="td-right">0</td><td class="td-right">0%</td><td class="td-center"><span class="pos-pill pos-low">43.7</span></td></tr>
+            <tr><td>anilao dive center</td><td class="td-right">0</td><td class="td-right">0%</td><td class="td-center"><span class="pos-pill pos-low">60.3</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card-head">
+          <span>📄 Top Pages by Traffic</span>
+          <span style="font-size:.7rem;color:var(--text2);font-weight:400">May 2026</span>
+        </div>
+        <table>
+          <thead><tr><th>Page</th><th class="td-right">Clicks</th><th class="td-right">Imp.</th><th class="td-right">CTR</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong style="color:var(--teal-d)">Homepage</strong><br><span style="font-size:.68rem;color:var(--text2)">/</span></td>
+              <td class="td-right"><strong>88</strong></td><td class="td-right">884</td><td class="td-right">9.95%</td>
+            </tr>
+            <tr>
+              <td>Blog: Manila to Anilao<br><span style="font-size:.68rem;color:var(--text2)">/blog/manila-to-anilao-transfer-guide</span></td>
+              <td class="td-right">0</td><td class="td-right"><strong>93</strong></td><td class="td-right">0%</td>
+            </tr>
+            <tr>
+              <td>Dive Page<br><span style="font-size:.68rem;color:var(--text2)">/dive.html</span></td>
+              <td class="td-right">0</td><td class="td-right"><strong>93</strong></td><td class="td-right">0%</td>
+            </tr>
+            <tr>
+              <td>Gallery<br><span style="font-size:.68rem;color:var(--text2)">/gallery.html</span></td>
+              <td class="td-right">0</td><td class="td-right">82</td><td class="td-right">0%</td>
+            </tr>
+            <tr>
+              <td>Rooms<br><span style="font-size:.68rem;color:var(--text2)">/rooms.html</span></td>
+              <td class="td-right">1</td><td class="td-right">57</td><td class="td-right">1.75%</td>
+            </tr>
+            <tr>
+              <td>Blog: Best Dive Sites<br><span style="font-size:.68rem;color:var(--text2)">/blog/best-dive-sites-anilao</span></td>
+              <td class="td-right">0</td><td class="td-right">54</td><td class="td-right">0%</td>
+            </tr>
+            <tr>
+              <td>Location<br><span style="font-size:.68rem;color:var(--text2)">/location.html</span></td>
+              <td class="td-right">0</td><td class="td-right">63</td><td class="td-right">0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTRIES + DEVICES -->
+  <div class="section">
+    <div class="section-title">Audience Insights</div>
+    <div class="two-col">
+      <div class="data-card">
+        <div class="data-card-head"><span>🌍 Top Countries</span></div>
+        <table>
+          <thead><tr><th>Country</th><th class="td-right">Clicks</th><th class="td-right">CTR</th><th>Share</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>🇵🇭 Philippines</td><td class="td-right"><strong>40</strong></td><td class="td-right">5.97%</td>
+              <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div><span style="font-size:.7rem;color:var(--text2)">47%</span></div></td>
+            </tr>
+            <tr>
+              <td>🇸🇬 Singapore</td><td class="td-right"><strong>13</strong></td><td class="td-right" style="color:var(--green);font-weight:700">25%</td>
+              <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:33%"></div></div><span style="font-size:.7rem;color:var(--text2)">15%</span></div></td>
+            </tr>
+            <tr>
+              <td>🇺🇸 United States</td><td class="td-right">8</td><td class="td-right">3.79%</td>
+              <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:20%"></div></div><span style="font-size:.7rem;color:var(--text2)">9%</span></div></td>
+            </tr>
+            <tr>
+              <td>🇭🇰 Hong Kong</td><td class="td-right">6</td><td class="td-right" style="color:var(--green);font-weight:700">20%</td>
+              <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:15%"></div></div><span style="font-size:.7rem;color:var(--text2)">7%</span></div></td>
+            </tr>
+            <tr>
+              <td>🇹🇼 Taiwan</td><td class="td-right">4</td><td class="td-right">20%</td>
+              <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:10%"></div></div><span style="font-size:.7rem;color:var(--text2)">5%</span></div></td>
+            </tr>
+            <tr>
+              <td>🇹🇭 Thailand</td><td class="td-right">4</td><td class="td-right">25%</td>
+              <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:10%"></div></div><span style="font-size:.7rem;color:var(--text2)">5%</span></div></td>
+            </tr>
+            <tr>
+              <td>🇳🇱 Netherlands</td><td class="td-right">3</td><td class="td-right">23.1%</td>
+              <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:8%"></div></div><span style="font-size:.7rem;color:var(--text2)">4%</span></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card-head"><span>📱 Device Breakdown</span></div>
+        <div class="device-row">
+          <div class="device-item">
+            <div class="device-header">
+              <span class="device-name">🖥 Desktop</span>
+              <span class="device-stats">51 clicks · 545 imp · <strong style="color:var(--green)">9.36% CTR</strong></span>
+            </div>
+            <div class="device-bar-bg"><div class="device-bar d-desktop" style="width:89%"></div></div>
+            <div style="font-size:.7rem;color:var(--text2);margin-top:.3rem">Users on laptop/desktop are in planning mode — highest CTR</div>
+          </div>
+          <div class="device-item">
+            <div class="device-header">
+              <span class="device-name">📱 Mobile</span>
+              <span class="device-stats">40 clicks · 609 imp · 6.57% CTR</span>
+            </div>
+            <div class="device-bar-bg"><div class="device-bar d-mobile" style="width:66%"></div></div>
+            <div style="font-size:.7rem;color:var(--text2);margin-top:.3rem">More impressions than desktop — mobile SEO is performing well</div>
+          </div>
+          <div class="device-item">
+            <div class="device-header">
+              <span class="device-name">📟 Tablet</span>
+              <span class="device-stats">0 clicks · 12 imp · 0% CTR</span>
+            </div>
+            <div class="device-bar-bg"><div class="device-bar d-tablet" style="width:8%"></div></div>
+            <div style="font-size:.7rem;color:var(--text2);margin-top:.3rem">Very small audience — minor concern</div>
+          </div>
+          <div style="background:#f8fafc;border-radius:8px;padding:1rem;margin-top:.5rem">
+            <div style="font-size:.72rem;font-weight:700;color:var(--navy);margin-bottom:.4rem">💡 Key Insight</div>
+            <div style="font-size:.75rem;color:var(--text2);line-height:1.65">Mobile gets <strong style="color:var(--navy)">more eyes</strong> but fewer clicks. Optimising mobile page descriptions and load speed will directly improve bookings from mobile users.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- KEY INSIGHTS -->
+  <div class="section">
+    <div class="section-title">Key Insights — May 2026</div>
+    <div class="action-grid">
+      <div class="action-card">
+        <div class="action-num a-high">1</div>
+        <div class="action-content">
+          <div class="action-title">Strong end-of-month momentum</div>
+          <div class="action-text">Clicks grew from 15 in Week 1 to 34 in Week 4 — a <strong>127% increase</strong> within the month. Traffic is accelerating, not plateauing.</div>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num a-high">2</div>
+        <div class="action-content">
+          <div class="action-title">CTR well above industry average</div>
+          <div class="action-text">At <strong>7.7% CTR</strong>, the site is performing more than 2× the 3–5% industry benchmark — search listings are compelling and relevant to searchers.</div>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num a-mid">3</div>
+        <div class="action-content">
+          <div class="action-title">Singapore is the highest-intent market</div>
+          <div class="action-text">Singapore visitors convert at a <strong>25% CTR</strong> — over 3× the overall average. This audience is actively researching and highly likely to book.</div>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num a-mid">4</div>
+        <div class="action-content">
+          <div class="action-title">Brand queries drive 51% of all clicks</div>
+          <div class="action-text">"Casa escondida" variations account for ~43 of 85 clicks. Generic terms like "scuba diving batangas" sit at position 43 — significant untapped organic traffic potential.</div>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num a-low">5</div>
+        <div class="action-content">
+          <div class="action-title">Blog content is gaining impressions, not yet clicks</div>
+          <div class="action-text">The Manila-to-Anilao guide and Best Dive Sites blog earned <strong>147 combined impressions</strong> with 0 clicks. Google is indexing them — stronger meta descriptions will convert views to visits.</div>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num a-low">6</div>
+        <div class="action-content">
+          <div class="action-title">Desktop users have higher booking intent</div>
+          <div class="action-text">Desktop CTR is <strong>9.36%</strong> vs mobile's 6.57%. Mobile drives more impressions (609 vs 545) but fewer clicks — mobile page speed and descriptions are the key lever.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- ══ FOOTER ══ -->
+<div class="report-footer">
+  Prepared by <strong>TechNext SG</strong> · hello@technext.asia · June 1, 2026 &nbsp;|&nbsp;
+  Data Source: Google Search Console · casaescondida-anilao.com &nbsp;|&nbsp;
+  Confidential — For Casa Escondida Anilao use only
+</div>
+
+<!-- ══ CHARTS JS ══ -->
+<script>
+const TEAL  = '#4dc8e8';
+const NAVY  = '#0d1e2e';
+const GOLD  = '#e8c56a';
+const GRAY  = '#e5eaf0';
+
+// Daily chart
+const dailyLabels = [
+  '1','2','3','4','5','6','7','8','9','10',
+  '11','12','13','14','15','16','17','18','19','20',
+  '21','22','23','24','25','26','27','28','29','30'
+];
+const dailyClicks = [0,2,3,1,5,2,2,1,1,2,3,4,3,2,2,3,2,1,2,3,7,1,2,4,1,3,4,8,8,3];
+const dailyImp    = [13,35,17,24,32,15,23,17,18,31,44,45,26,44,46,42,33,57,19,22,38,41,47,33,47,43,54,54,58,87];
+
+new Chart(document.getElementById('dailyChart'), {
+  type: 'bar',
+  data: {
+    labels: dailyLabels,
+    datasets: [
+      {
+        label: 'Impressions',
+        data: dailyImp,
+        backgroundColor: 'rgba(77,200,232,0.15)',
+        borderColor: 'rgba(77,200,232,0.4)',
+        borderWidth: 1,
+        yAxisID: 'y1',
+        type: 'bar',
+        order: 2
+      },
+      {
+        label: 'Clicks',
+        data: dailyClicks,
+        borderColor: TEAL,
+        backgroundColor: 'rgba(77,200,232,0.9)',
+        borderWidth: 2,
+        tension: 0.4,
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        yAxisID: 'y',
+        type: 'line',
+        order: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { position: 'top', labels: { font: { size: 11 }, boxWidth: 12 } } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+      y:  { position: 'left',  beginAtZero: true, max: 10, title: { display: true, text: 'Clicks', font: { size: 10 } }, grid: { color: '#f0f4f8' }, ticks: { font: { size: 10 } } },
+      y1: { position: 'right', beginAtZero: true, title: { display: true, text: 'Impressions', font: { size: 10 } }, grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+
+// Weekly chart
+new Chart(document.getElementById('weeklyChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Week 1\nMay 1–7', 'Week 2\nMay 8–14', 'Week 3\nMay 15–21', 'Week 4\nMay 22–30'],
+    datasets: [
+      {
+        label: 'Clicks',
+        data: [15, 16, 20, 34],
+        backgroundColor: [
+          'rgba(147,197,253,0.85)',
+          'rgba(110,231,183,0.85)',
+          'rgba(232,197,106,0.85)',
+          'rgba(77,200,232,0.85)'
+        ],
+        borderRadius: 6, borderSkipped: false
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+      y: { beginAtZero: true, grid: { color: '#f0f4f8' }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+</script>
+</body>
+</html>
