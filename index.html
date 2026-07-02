@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analytics Reports — Casa Escondida Anilao</title>
+  <style>
+    :root {
+      --navy: #0d1e2e; --navy2: #1a3050; --teal: #4dc8e8;
+      --gold: #e8c56a; --bg: #f4f7fa; --border: #dde5ee;
+      --text: #1a2b3c; --text2: #4a6070; --card: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      color: white; padding: 3rem;
+    }
+    .header-eyebrow { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-bottom: .5rem; }
+    .header-title { font-size: 1.8rem; font-weight: 700; }
+    .header-title span { color: var(--teal); }
+    .header-sub { color: rgba(255,255,255,.55); font-size: .88rem; margin-top: .4rem; }
+    .container { max-width: 800px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
+    .report-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.8rem; text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: .6rem;
+      transition: box-shadow .15s, transform .15s; position: relative; overflow: hidden;
+    }
+    .report-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--teal); }
+    .report-card.gold::before { background: var(--gold); }
+    .report-card:hover { box-shadow: 0 4px 20px rgba(13,30,46,.1); transform: translateY(-2px); }
+    .card-tag { font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
+    .card-tag.gold { color: #b08a30; }
+    .card-title { font-size: 1.15rem; font-weight: 700; color: var(--navy); }
+    .card-period { font-size: .78rem; color: var(--text2); }
+    .card-stats { display: flex; gap: 1.5rem; margin-top: .5rem; }
+    .stat { display: flex; flex-direction: column; gap: .1rem; }
+    .stat-val { font-size: 1.1rem; font-weight: 700; color: var(--navy); }
+    .stat-lbl { font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; color: var(--text2); }
+    .card-arrow { margin-top: .5rem; font-size: .78rem; color: var(--teal); font-weight: 600; }
+    .section-label { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: .6rem; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    footer { text-align: center; padding: 1.5rem; font-size: .72rem; color: var(--text2); }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">TechNext SG · Digital Marketing</div>
+  <div class="header-title">Casa Escondida Anilao — <span>Analytics Reports</span></div>
+  <div class="header-sub">Google Search Console · Monthly Performance</div>
+</div>
+
+<div class="container">
+  <div class="section-label">All Reports</div>
+  <div class="grid">
+
+    <a class="report-card gold" href="June-2026-Analytics-Report.html">
+      <div class="card-tag gold">Latest · June 2026</div>
+      <div class="card-title">June 2026 Analytics Report</div>
+      <div class="card-period">Data Period: June 1 – June 30, 2026</div>
+      <div class="card-stats">
+        <div class="stat"><div class="stat-val">108</div><div class="stat-lbl">Clicks</div></div>
+        <div class="stat"><div class="stat-val">2,134</div><div class="stat-lbl">Impressions</div></div>
+        <div class="stat"><div class="stat-val">5.1%</div><div class="stat-lbl">CTR</div></div>
+        <div class="stat"><div class="stat-val">8.6</div><div class="stat-lbl">Avg Position</div></div>
+      </div>
+      <div class="card-arrow">View Report →</div>
+    </a>
+
+    <a class="report-card" href="may-2026-analytics-report.html">
+      <div class="card-tag">May 2026</div>
+      <div class="card-title">May 2026 Analytics Report</div>
+      <div class="card-period">Data Period: May 1 – May 30, 2026</div>
+      <div class="card-stats">
+        <div class="stat"><div class="stat-val">85</div><div class="stat-lbl">Clicks</div></div>
+        <div class="stat"><div class="stat-val">1,105</div><div class="stat-lbl">Impressions</div></div>
+        <div class="stat"><div class="stat-val">7.7%</div><div class="stat-lbl">CTR</div></div>
+        <div class="stat"><div class="stat-val">9.0</div><div class="stat-lbl">Avg Position</div></div>
+      </div>
+      <div class="card-arrow">View Report →</div>
+    </a>
+
+  </div>
+</div>
+
+<footer>TechNext SG · hello@technext.asia · casa-escondida-anilao.com</footer>
+
+</body>
+</html>
