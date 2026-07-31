@@ -44,6 +44,26 @@
     .meta-label { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.4); }
     .meta-value { font-size: .88rem; color: rgba(255,255,255,.9); font-weight: 500; }
 
+    /* ── NAV ── */
+    .report-nav {
+      background: var(--navy2); padding: .6rem 3rem;
+      display: flex; gap: .6rem; align-items: center; flex-wrap: wrap;
+    }
+    .nav-label {
+      font-size: .6rem; letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(255,255,255,.35); margin-right: .5rem; flex-shrink: 0;
+    }
+    .nav-link {
+      font-size: .75rem; font-weight: 600; line-height: 1.5;
+      padding: .3rem .9rem; border-radius: 20px; text-decoration: none;
+      min-width: 100px; text-align: center; flex-shrink: 0;
+      border: 1px solid transparent;
+      transition: background .15s, color .15s;
+    }
+    .nav-link.active { background: var(--teal); color: var(--navy); border-color: var(--teal); }
+    .nav-link:not(.active) { color: rgba(255,255,255,.55); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.08); }
+    .nav-link:not(.active):hover { background: rgba(255,255,255,.14); color: #fff; }
+
     /* ── LAYOUT ── */
     .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
     .section { margin-bottom: 2.5rem; }
@@ -252,11 +272,11 @@
 </div>
 
 <!-- ══ NAV ══ -->
-<div style="background:#1a3050;padding:.6rem 3rem;display:flex;gap:1.5rem;align-items:center;">
-  <span style="font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);">Reports</span>
-  <a style="font-size:.75rem;font-weight:600;padding:.3rem .8rem;border-radius:20px;text-decoration:none;background:#4dc8e8;color:#0d1e2e;" href="may-2026-analytics-report.html">May 2026 ← Current</a>
-  <a style="font-size:.75rem;font-weight:600;padding:.3rem .8rem;border-radius:20px;text-decoration:none;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);" href="June-2026-Analytics-Report.html">June 2026</a>
-  <a style="font-size:.75rem;font-weight:600;padding:.3rem .8rem;border-radius:20px;text-decoration:none;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);" href="July-2026-Analytics-Report.html">July 2026</a>
+<div class="report-nav">
+  <span class="nav-label">Reports</span>
+  <a class="nav-link" href="July-2026-Analytics-Report.html">July 2026</a>
+  <a class="nav-link" href="June-2026-Analytics-Report.html">June 2026</a>
+  <a class="nav-link active" aria-current="page" href="may-2026-analytics-report.html">May 2026</a>
 </div>
 
 <!-- ══ MAIN ══ -->

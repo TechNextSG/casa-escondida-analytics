@@ -47,16 +47,22 @@
     /* ── NAV ── */
     .report-nav {
       background: var(--navy2); padding: .6rem 3rem;
-      display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;
+      display: flex; gap: .6rem; align-items: center; flex-wrap: wrap;
     }
-    .nav-label { font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+    .nav-label {
+      font-size: .6rem; letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(255,255,255,.35); margin-right: .5rem; flex-shrink: 0;
+    }
     .nav-link {
-      font-size: .75rem; font-weight: 600; padding: .3rem .8rem; border-radius: 20px;
-      text-decoration: none; transition: background .15s;
+      font-size: .75rem; font-weight: 600; line-height: 1.5;
+      padding: .3rem .9rem; border-radius: 20px; text-decoration: none;
+      min-width: 100px; text-align: center; flex-shrink: 0;
+      border: 1px solid transparent;
+      transition: background .15s, color .15s;
     }
-    .nav-link.active { background: var(--teal); color: var(--navy); }
-    .nav-link:not(.active) { color: rgba(255,255,255,.55); background: rgba(255,255,255,.06); }
-    .nav-link:not(.active):hover { background: rgba(255,255,255,.12); color: white; }
+    .nav-link.active { background: var(--teal); color: var(--navy); border-color: var(--teal); }
+    .nav-link:not(.active) { color: rgba(255,255,255,.55); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.08); }
+    .nav-link:not(.active):hover { background: rgba(255,255,255,.14); color: #fff; }
 
     /* ── LAYOUT ── */
     .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
@@ -230,7 +236,7 @@
 <!-- ══ NAV ══ -->
 <div class="report-nav">
   <span class="nav-label">Reports</span>
-  <a class="nav-link active" href="July-2026-Analytics-Report.html">July 2026 ← Current</a>
+  <a class="nav-link active" aria-current="page" href="July-2026-Analytics-Report.html">July 2026</a>
   <a class="nav-link" href="June-2026-Analytics-Report.html">June 2026</a>
   <a class="nav-link" href="may-2026-analytics-report.html">May 2026</a>
 </div>
@@ -278,6 +284,7 @@
   <!-- MOM COMPARISON -->
   <div class="section">
     <div class="section-title">Month-over-Month: June vs July 2026</div>
+    <div class="table-scroll">
     <table class="mom-table">
       <thead>
         <tr>
@@ -319,11 +326,13 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 
   <!-- 3-MONTH TREND -->
   <div class="section">
     <div class="section-title">Three-Month Trajectory — May → July 2026</div>
+    <div class="table-scroll">
     <table class="mom-table">
       <thead>
         <tr>
@@ -365,6 +374,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 
   <!-- WEEKLY BREAKDOWN -->
